@@ -28,12 +28,12 @@ export default function Navbar() {
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
-      <div className="bg-[#145a2e] text-white text-xs py-1.5 px-4">
+      <div className="bg-[#4c1d95] text-white text-xs py-1.5 px-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <span className="hidden sm:block">🇧🇩 বাংলাদেশের সহজ ডিজিটাল সেবা প্ল্যাটফর্ম</span>
           <div className="flex items-center gap-1 ml-auto">
             <Phone size={11} />
-            <a href="tel:01700000000" className="hover:text-green-300 transition-colors">০১৭০০-০০০০০০</a>
+            <a href="tel:01700000000" className="hover:text-violet-300 transition-colors">০১৭০০-০০০০০০</a>
           </div>
         </div>
       </div>
@@ -41,20 +41,20 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1a7a3c] to-[#22c55e] flex items-center justify-center shadow-lg">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#7c3aed] to-[#8b5cf6] flex items-center justify-center shadow-lg">
               <span className="text-white font-bold text-lg">স</span>
             </div>
             <div>
-              <div className="text-[#1a7a3c] font-bold text-lg leading-tight">সহজ ডিজিটাল সেবা</div>
+              <div className="text-[#7c3aed] font-bold text-lg leading-tight">সহজ ডিজিটাল সেবা</div>
               <div className="text-gray-400 text-xs">Shohoj Digital Sheba</div>
             </div>
           </Link>
 
           <div className="hidden md:flex items-center gap-6">
-            <Link href="/" className="text-gray-700 hover:text-[#1a7a3c] font-medium transition-colors text-sm">হোম</Link>
-            <Link href="/services" className="text-gray-700 hover:text-[#1a7a3c] font-medium transition-colors text-sm">সেবাসমূহ</Link>
-            <Link href="/about" className="text-gray-700 hover:text-[#1a7a3c] font-medium transition-colors text-sm">আমাদের সম্পর্কে</Link>
-            <Link href="/contact" className="text-gray-700 hover:text-[#1a7a3c] font-medium transition-colors text-sm">যোগাযোগ</Link>
+            <Link href="/" className="text-gray-700 hover:text-[#7c3aed] font-medium transition-colors text-sm">হোম</Link>
+            <Link href="/services" className="text-gray-700 hover:text-[#7c3aed] font-medium transition-colors text-sm">সেবাসমূহ</Link>
+            <Link href="/about" className="text-gray-700 hover:text-[#7c3aed] font-medium transition-colors text-sm">আমাদের সম্পর্কে</Link>
+            <Link href="/contact" className="text-gray-700 hover:text-[#7c3aed] font-medium transition-colors text-sm">যোগাযোগ</Link>
           </div>
 
           <div className="hidden md:flex items-center gap-3">
@@ -69,7 +69,7 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <Link href="/auth/login" className="flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-[#1a7a3c] text-[#1a7a3c] font-medium text-sm hover:bg-green-50 transition-all">
+                <Link href="/auth/login" className="flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-[#7c3aed] text-[#7c3aed] font-medium text-sm hover:bg-violet-50 transition-all">
                   <LogIn size={16} /> লগইন
                 </Link>
                 <Link href="/auth/register" className="flex items-center gap-2 px-4 py-2 rounded-lg btn-primary text-white font-medium text-sm">
@@ -99,7 +99,7 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <Link href="/auth/login" className="flex-1 text-center py-2.5 rounded-lg border-2 border-[#1a7a3c] text-[#1a7a3c] font-medium text-sm" onClick={() => setIsOpen(false)}>লগইন</Link>
+                <Link href="/auth/login" className="flex-1 text-center py-2.5 rounded-lg border-2 border-[#7c3aed] text-[#7c3aed] font-medium text-sm" onClick={() => setIsOpen(false)}>লগইন</Link>
                 <Link href="/auth/register" className="flex-1 text-center py-2.5 rounded-lg btn-primary text-white font-medium text-sm" onClick={() => setIsOpen(false)}>রেজিস্ট্রেশন</Link>
               </>
             )}

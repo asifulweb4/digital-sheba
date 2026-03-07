@@ -73,17 +73,17 @@ function LoginForm() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#f0fdf4] via-white to-[#dcfce7] flex">
+    <div className="min-h-screen bg-gradient-to-br from-[#f8fafc] via-white to-[#dcfce7] flex">
       {/* Left Panel */}
       <div className="hidden lg:flex lg:w-1/2 hero-gradient flex-col justify-center items-center p-12 relative overflow-hidden">
         <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-white opacity-5 blur-3xl"></div>
-        <div className="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-green-300 opacity-10 blur-3xl"></div>
+        <div className="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-violet-300 opacity-10 blur-3xl"></div>
         <div className="relative text-center text-white">
           <div className="w-20 h-20 rounded-3xl bg-white/20 flex items-center justify-center mx-auto mb-6 backdrop-blur-sm">
             <span className="text-4xl font-bold">স</span>
           </div>
           <h1 className="text-4xl font-bold mb-3">সহজ ডিজিটাল সেবা</h1>
-          <p className="text-green-100 text-lg mb-10">বাংলাদেশের সহজ ডিজিটাল সেবা প্ল্যাটফর্ম</p>
+          <p className="text-violet-100 text-lg mb-10">বাংলাদেশের সহজ ডিজিটাল সেবা প্ল্যাটফর্ম</p>
           <div className="space-y-4 text-left">
             {[
               'NID, জন্ম নিবন্ধন, TIN সেবা',
@@ -92,7 +92,7 @@ function LoginForm() {
               '২৪/৭ সহায়তা পাওয়া যায়',
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3">
-                <CheckCircle size={20} className="text-green-300 flex-shrink-0" />
+                <CheckCircle size={20} className="text-violet-300 flex-shrink-0" />
                 <span className="text-sm">{item}</span>
               </div>
             ))}
@@ -105,10 +105,10 @@ function LoginForm() {
         <div className="w-full max-w-md">
           {/* Mobile Logo */}
           <div className="lg:hidden text-center mb-8">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1a7a3c] to-[#22c55e] flex items-center justify-center mx-auto mb-3 shadow-lg">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#7c3aed] to-[#8b5cf6] flex items-center justify-center mx-auto mb-3 shadow-lg">
               <span className="text-white font-bold text-2xl">স</span>
             </div>
-            <h1 className="text-xl font-bold text-[#1a7a3c]">সহজ ডিজিটাল সেবা</h1>
+            <h1 className="text-xl font-bold text-[#7c3aed]">সহজ ডিজিটাল সেবা</h1>
           </div>
 
           <div className="mb-8">
@@ -117,7 +117,7 @@ function LoginForm() {
           </div>
 
           {justRegistered && (
-            <div className="bg-green-50 border border-green-200 text-green-700 text-sm px-4 py-3 rounded-xl mb-5 flex items-center gap-2">
+            <div className="bg-violet-50 border border-violet-200 text-violet-700 text-sm px-4 py-3 rounded-xl mb-5 flex items-center gap-2">
               <CheckCircle size={16} /> রেজিস্ট্রেশন সফল হয়েছে! এখন লগইন করুন।
             </div>
           )}
@@ -133,7 +133,7 @@ function LoginForm() {
                   value={form.identifier}
                   onChange={handleChange}
                   placeholder="example@gmail.com বা 01XXXXXXXX"
-                  className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-[#1a7a3c]"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-[#7c3aed]"
                   required
                 />
               </div>
@@ -142,7 +142,7 @@ function LoginForm() {
             <div>
               <div className="flex justify-between items-center mb-1">
                 <label className="block text-sm font-medium text-gray-700">পাসওয়ার্ড</label>
-                <Link href="/auth/forgot" className="text-xs text-[#1a7a3c] hover:underline">পাসওয়ার্ড ভুলে গেছেন?</Link>
+                <Link href="/auth/forgot" className="text-xs text-[#7c3aed] hover:underline">পাসওয়ার্ড ভুলে গেছেন?</Link>
               </div>
               <div className="relative">
                 <Lock size={17} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -152,7 +152,7 @@ function LoginForm() {
                   value={form.password}
                   onChange={handleChange}
                   placeholder="আপনার পাসওয়ার্ড"
-                  className="w-full pl-10 pr-12 py-3 border border-gray-200 rounded-xl bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-[#1a7a3c]"
+                  className="w-full pl-10 pr-12 py-3 border border-gray-200 rounded-xl bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-[#7c3aed]"
                   required
                 />
                 <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
@@ -180,13 +180,13 @@ function LoginForm() {
 
             <p className="text-center text-sm text-gray-500">
               অ্যাকাউন্ট নেই?{' '}
-              <Link href="/auth/register" className="text-[#1a7a3c] font-bold hover:underline">
+              <Link href="/auth/register" className="text-[#7c3aed] font-bold hover:underline">
                 বিনামূল্যে রেজিস্ট্রেশন করুন
               </Link>
             </p>
 
             <div className="text-center">
-              <Link href="/dashboard" className="text-sm text-gray-400 hover:text-[#1a7a3c] transition-colors underline underline-offset-2">
+              <Link href="/dashboard" className="text-sm text-gray-400 hover:text-[#7c3aed] transition-colors underline underline-offset-2">
                 লগইন ছাড়াই ড্যাশবোর্ড দেখুন →
               </Link>
             </div>
@@ -200,8 +200,8 @@ function LoginForm() {
 export default function LoginPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-[#f0fdf4] flex items-center justify-center">
-        <div className="w-12 h-12 border-4 border-[#1a7a3c] border-t-transparent rounded-full animate-spin"></div>
+      <div className="min-h-screen bg-[#f8fafc] flex items-center justify-center">
+        <div className="w-12 h-12 border-4 border-[#7c3aed] border-t-transparent rounded-full animate-spin"></div>
       </div>
     }>
       <LoginForm />

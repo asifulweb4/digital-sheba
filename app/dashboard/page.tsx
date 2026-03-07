@@ -123,10 +123,10 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#f0fdf4]">
+      <div className="min-h-screen flex items-center justify-center bg-[#f8fafc]">
         <div className="text-center">
-          <div className="w-12 h-12 spinner mx-auto mb-4 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
-          <p className="text-[#1a7a3c] font-medium">লোড হচ্ছে...</p>
+          <div className="w-12 h-12 spinner mx-auto mb-4 border-4 border-violet-500 border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-[#7c3aed] font-medium">লোড হচ্ছে...</p>
         </div>
       </div>
     )
@@ -141,11 +141,14 @@ export default function DashboardPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-[#f8fffe] flex">
+    <div className="min-h-screen relative flex bg-[#f8fafc] overflow-hidden">
+      {/* Background decorations */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-violet-300/20 blur-[100px] pointer-events-none"></div>
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-fuchsia-300/20 blur-[100px] pointer-events-none"></div>
       {/* Sidebar - আপনার কোড */}
-      <aside className={`fixed inset-y-0 left-0 z-50 w-72 bg-[#0f3d22] transform transition-transform duration-300 lg:translate-x-0 lg:static lg:inset-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <aside className={`fixed inset-y-0 left-0 z-50 w-72 bg-[#2e1065] transform transition-transform duration-300 lg:translate-x-0 lg:static lg:inset-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="flex flex-col h-full">
-          <div className="p-5 border-b border-[#1a7a3c]">
+          <div className="p-5 border-b border-[#7c3aed]">
             <div className="flex items-center justify-between">
               <Link href="/" className="flex items-center gap-3 text-white font-bold">সহজ ডিজিটাল সেবা</Link>
               <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-white"><X /></button>
@@ -153,33 +156,33 @@ export default function DashboardPage() {
           </div>
           <div className="p-5">
             {isGuest ? (
-              <div className="bg-[#1a7a3c] rounded-xl p-4 text-white space-y-2">
+              <div className="bg-[#7c3aed] rounded-xl p-4 text-white space-y-2">
                 <p className="text-xs opacity-70 text-center">সেবা নিতে প্রথমে লগিন করুন</p>
-                <Link href="/auth/login" className="w-full bg-white text-green-800 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1">
+                <Link href="/auth/login" className="w-full bg-white text-violet-800 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1">
                   <LogIn size={13} /> লগিন
                 </Link>
-                <Link href="/auth/register" className="w-full bg-green-600 text-white py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1">
+                <Link href="/auth/register" className="w-full bg-violet-600 text-white py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1">
                   <UserPlus size={13} /> রেজিস্ট্রেশন
                 </Link>
               </div>
             ) : (
-              <div className="bg-[#1a7a3c] rounded-xl p-4 text-white">
+              <div className="bg-[#7c3aed] rounded-xl p-4 text-white">
                 <p className="text-xs opacity-70">বর্তমান ব্যালেন্স</p>
                 <p className="text-2xl font-bold">{profile?.balance || 0} ৳</p>
-                <button onClick={() => setPaymentModalOpen(true)} className="mt-2 w-full bg-white text-green-800 py-1.5 rounded-lg text-xs font-bold">রিচার্জ করুন</button>
+                <button onClick={() => setPaymentModalOpen(true)} className="mt-2 w-full bg-white text-violet-800 py-1.5 rounded-lg text-xs font-bold">রিচার্জ করুন</button>
               </div>
             )}
           </div>
           <nav className="flex-1 p-4 space-y-1">
             {navItems.map(item => (
-              <Link key={item.label} href={item.href} className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-300 hover:bg-[#1a7a3c] hover:text-white transition text-sm">
+              <Link key={item.label} href={item.href} className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-300 hover:bg-[#7c3aed] hover:text-white transition text-sm">
                 <item.icon size={18} /> {item.label}
               </Link>
             ))}
           </nav>
-          <div className="p-4 border-t border-[#1a7a3c]">
+          <div className="p-4 border-t border-[#7c3aed]">
             {isGuest ? (
-              <Link href="/auth/login" className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-green-300 hover:bg-[#1a7a3c] transition text-sm">
+              <Link href="/auth/login" className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-violet-300 hover:bg-[#7c3aed] transition text-sm">
                 <LogIn size={18} /> লগিন / রেজিস্ট্রেশন
               </Link>
             ) : (
@@ -202,59 +205,66 @@ export default function DashboardPage() {
           <div className="flex items-center gap-3">
             <div className="text-right hidden sm:block">
               <p className="text-xs font-bold">{profile?.full_name}</p>
-              <p className="text-[10px] text-green-600">ব্যালেন্স: {profile?.balance}৳</p>
+              <p className="text-[10px] text-violet-600">ব্যালেন্স: {profile?.balance}৳</p>
             </div>
-            <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-700 font-bold">{profile?.full_name?.charAt(0)}</div>
+            <div className="w-10 h-10 rounded-full bg-violet-100 flex items-center justify-center text-violet-700 font-bold">{profile?.full_name?.charAt(0)}</div>
           </div>
         </header>
 
         <main className="p-4 sm:p-6 overflow-y-auto">
           {/* Welcome banner */}
           {isGuest ? (
-            <div className="bg-gradient-to-r from-[#1a7a3c] to-[#22c55e] rounded-3xl p-6 mb-6 text-white flex justify-between items-center">
-              <div>
-                <h2 className="text-xl font-bold">সহজ ডিজিটাল সেবা-তে স্বাগতম! 👋</h2>
-                <p className="text-green-100 text-sm mt-1">সেবা অর্ডার করতে লগিন বা রেজিস্ট্রেশন করুন — সম্পূর্ণ বিনামূল্যে!</p>
-                <div className="flex gap-3 mt-4">
-                  <Link href="/auth/register" className="bg-white text-[#1a7a3c] px-5 py-2 rounded-xl font-bold text-sm shadow-lg flex items-center gap-1">
-                    <UserPlus size={15} /> বিনামূল্যে যোগ দিন
+            <div className="relative bg-gradient-to-br from-[#2e1065] via-[#7c3aed] to-[#c026d3] rounded-3xl p-6 sm:p-8 mb-8 text-white flex justify-between items-center shadow-[0_15px_40px_rgb(124,58,237,0.2)] border border-white/10 overflow-hidden transform transition-all hover:scale-[1.01]">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+              <div className="relative z-10 w-full sm:w-auto">
+                <h2 className="text-2xl sm:text-3xl font-black mb-1 drop-shadow-sm tracking-tight text-white/95">সহজ ডিজিটাল সেবা-তে স্বাগতম! <span className="inline-block animate-bounce_slow">👋</span></h2>
+                <p className="text-violet-100 text-sm sm:text-base mt-2 mb-6 font-medium tracking-wide max-w-lg">সেবা অর্ডার করতে লগিন বা রেজিস্ট্রেশন করুন — সম্পূর্ণ বিনামূল্যে!</p>
+                <div className="flex flex-wrap gap-3">
+                  <Link href="/auth/register" className="bg-white text-[#2e1065] px-6 py-3 rounded-2xl font-black text-sm shadow-[0_8px_20px_rgb(0,0,0,0.12)] hover:shadow-[0_12px_25px_rgb(0,0,0,0.2)] hover:-translate-y-1 transition-all flex items-center gap-2">
+                    <UserPlus size={16} strokeWidth={2.5} /> বিনামূল্যে যোগ দিন
                   </Link>
-                  <Link href="/auth/login" className="bg-white/20 text-white px-5 py-2 rounded-xl font-bold text-sm border border-white/30 flex items-center gap-1">
-                    <LogIn size={15} /> লগিন
+                  <Link href="/auth/login" className="bg-white/10 backdrop-blur-md text-white px-6 py-3 rounded-2xl font-bold text-sm border border-white/20 hover:bg-white/20 hover:-translate-y-1 transition-all flex items-center gap-2">
+                    <LogIn size={16} /> লগিন
                   </Link>
                 </div>
               </div>
-              <Wallet size={80} className="opacity-20 hidden md:block" />
+              <Wallet size={120} className="absolute right-[-10px] bottom-[-20px] opacity-[0.07] transform -rotate-12 hidden md:block" />
             </div>
           ) : (
-            <div className="bg-gradient-to-r from-[#1a7a3c] to-[#22c55e] rounded-3xl p-6 mb-6 text-white flex justify-between items-center">
-              <div>
-                <h2 className="text-xl font-bold">আস্সালামু আলাইকুম, {profile?.full_name?.split(' ')[0]}! 👋</h2>
-                <p className="text-green-100 text-sm mt-1">আজকে আপনি কোন সেবাটি নিতে চান?</p>
-                <button onClick={() => setPaymentModalOpen(true)} className="mt-4 bg-white text-[#1a7a3c] px-6 py-2 rounded-xl font-bold text-sm shadow-lg">ব্যালেন্স যোগ করুন</button>
+            <div className="relative bg-gradient-to-br from-[#2e1065] via-[#7c3aed] to-[#c026d3] rounded-3xl p-6 sm:p-8 mb-8 text-white flex justify-between items-center shadow-[0_15px_40px_rgb(124,58,237,0.2)] border border-white/10 overflow-hidden transform transition-all hover:scale-[1.01]">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+              <div className="relative z-10">
+                <h2 className="text-2xl font-black drop-shadow-sm mb-1 text-white/95">আস্সালামু আলাইকুম, {profile?.full_name?.split(' ')[0]}! <span className="inline-block animate-bounce_slow">👋</span></h2>
+                <p className="text-violet-100/90 text-sm sm:text-base mt-1 font-medium tracking-wide mb-5">আজকে আপনি কোন সরকারি সেবাটি নিতে চান?</p>
+                <button onClick={() => setPaymentModalOpen(true)} className="bg-white text-[#2e1065] px-6 py-2.5 rounded-2xl font-black text-sm shadow-[0_8px_20px_rgb(0,0,0,0.12)] hover:shadow-[0_12px_25px_rgb(0,0,0,0.2)] hover:-translate-y-1 transition-all flex items-center gap-2">
+                  <Wallet size={16} strokeWidth={2.5} /> ব্যালেন্স যোগ করুন
+                </button>
               </div>
-              <Wallet size={80} className="opacity-20 hidden md:block" />
+              <Wallet size={120} className="absolute right-[-10px] bottom-[-20px] opacity-[0.07] transform -rotate-12 hidden md:block" />
             </div>
           )}
 
           {/* Categories */}
           <div className="flex gap-2 overflow-x-auto pb-4 no-scrollbar">
             {categories.map(cat => (
-              <button key={cat.id} onClick={() => setActiveCategory(cat.id)} className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-all ${activeCategory === cat.id ? 'bg-[#1a7a3c] text-white shadow-md' : 'bg-white text-gray-600 border border-gray-100'}`}>
+              <button key={cat.id} onClick={() => setActiveCategory(cat.id)} className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-all ${activeCategory === cat.id ? 'bg-[#7c3aed] text-white shadow-md' : 'bg-white text-gray-600 border border-gray-100'}`}>
                 {cat.label}
               </button>
             ))}
           </div>
 
           {/* Services Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 mt-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-4 relative z-10">
             {filteredServices.map(service => (
-              <button key={service.id} onClick={() => setActiveService(service.id)} className="bg-white rounded-2xl p-4 text-center border border-gray-50 shadow-sm hover:shadow-md transition-all group">
-                <div className={`w-12 h-12 ${service.color} rounded-2xl flex items-center justify-center text-xl mx-auto mb-3 group-hover:scale-110 transition`}>
+              <button key={service.id} onClick={() => setActiveService(service.id)} className="bg-white/80 backdrop-blur-xl rounded-[1.5rem] p-5 text-center border border-white hover:border-violet-200 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_15px_35px_rgb(124,58,237,0.1)] hover:-translate-y-1.5 transition-all duration-300 group overflow-hidden relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-white/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className={`relative z-10 w-14 h-14 ${service.color} rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4 group-hover:scale-110 group-hover:rotate-[3deg] transition-transform duration-300 shadow-[0_4px_15px_rgb(0,0,0,0.1)]`}>
                   {service.icon}
                 </div>
-                <p className="text-xs font-bold text-gray-700 leading-tight mb-1">{service.title}</p>
-                <span className="text-[10px] bg-green-50 text-green-700 px-2 py-0.5 rounded-full font-bold">৳ {service.price}</span>
+                <p className="relative z-10 text-xs font-bold text-gray-800 leading-tight mb-3 line-clamp-2">{service.title}</p>
+                <div className="relative z-10 inline-flex items-center justify-center bg-gradient-to-r from-violet-50 to-fuchsia-50 text-[#7c3aed] px-3 py-1.5 rounded-full text-[10px] font-black tracking-wide border border-violet-100/60 shadow-inner">
+                  <span className="mr-0.5 opacity-60">৳</span> {service.price}
+                </div>
               </button>
             ))}
           </div>
@@ -263,23 +273,23 @@ export default function DashboardPage() {
           {paymentModalOpen && (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
               <div className="bg-white rounded-3xl w-full max-w-md p-6 animate-in zoom-in-95 duration-200 shadow-2xl">
-                <h3 className="text-xl font-bold mb-4 flex items-center gap-2"><Wallet className="text-green-600" /> রিচার্জ করুন</h3>
-                <div className="bg-green-50 p-4 rounded-2xl mb-4 border border-green-100">
-                  <p className="text-xs text-green-800 font-bold mb-1 uppercase tracking-wider">বিকাশ/নগদ (পার্সোনাল)</p>
-                  <p className="text-lg font-black text-green-700 tracking-widest">017XXXXXXXX</p>
-                  <p className="text-[10px] text-green-600 mt-1">সেন্ড মানি করার পর ট্রানজেকশন আইডি দিন</p>
+                <h3 className="text-xl font-bold mb-4 flex items-center gap-2"><Wallet className="text-violet-600" /> রিচার্জ করুন</h3>
+                <div className="bg-violet-50 p-4 rounded-2xl mb-4 border border-violet-100">
+                  <p className="text-xs text-violet-800 font-bold mb-1 uppercase tracking-wider">বিকাশ/নগদ (পার্সোনাল)</p>
+                  <p className="text-lg font-black text-violet-700 tracking-widest">017XXXXXXXX</p>
+                  <p className="text-[10px] text-violet-600 mt-1">সেন্ড মানি করার পর ট্রানজেকশন আইডি দিন</p>
                 </div>
                 <div className="space-y-4">
                   <div className="flex gap-2">
                     {['bKash', 'Nagad'].map(m => (
-                      <button key={m} onClick={() => setMethod(m)} className={`flex-1 py-2 rounded-xl border-2 text-sm font-bold transition-all ${method === m ? 'border-green-600 bg-green-50 text-green-700' : 'border-gray-100 text-gray-400'}`}>{m}</button>
+                      <button key={m} onClick={() => setMethod(m)} className={`flex-1 py-2 rounded-xl border-2 text-sm font-bold transition-all ${method === m ? 'border-violet-600 bg-violet-50 text-violet-700' : 'border-gray-100 text-gray-400'}`}>{m}</button>
                     ))}
                   </div>
-                  <input type="number" placeholder="টাকার পরিমাণ" className="w-full p-3.5 bg-gray-50 border-none rounded-2xl outline-none focus:ring-2 ring-green-500" value={depositAmount} onChange={e => setDepositAmount(e.target.value)} />
-                  <input type="text" placeholder="Transaction ID (TrxID)" className="w-full p-3.5 bg-gray-50 border-none rounded-2xl outline-none focus:ring-2 ring-green-500" value={trxId} onChange={e => setTrxId(e.target.value)} />
+                  <input type="number" placeholder="টাকার পরিমাণ" className="w-full p-3.5 bg-gray-50 border-none rounded-2xl outline-none focus:ring-2 ring-violet-500" value={depositAmount} onChange={e => setDepositAmount(e.target.value)} />
+                  <input type="text" placeholder="Transaction ID (TrxID)" className="w-full p-3.5 bg-gray-50 border-none rounded-2xl outline-none focus:ring-2 ring-violet-500" value={trxId} onChange={e => setTrxId(e.target.value)} />
                   <div className="flex gap-3">
                     <button onClick={() => setPaymentModalOpen(false)} className="flex-1 py-3.5 bg-gray-100 rounded-2xl font-bold text-gray-500">বাতিল</button>
-                    <button onClick={handleAddBalance} disabled={submitting} className="flex-1 py-3.5 bg-[#1a7a3c] text-white rounded-2xl font-bold shadow-lg shadow-green-200">
+                    <button onClick={handleAddBalance} disabled={submitting} className="flex-1 py-3.5 bg-[#7c3aed] text-white rounded-2xl font-bold shadow-lg shadow-violet-200">
                       {submitting ? 'প্রসেসিং...' : 'সাবমিট করুন'}
                     </button>
                   </div>
@@ -303,7 +313,7 @@ export default function DashboardPage() {
                         <div className={`w-14 h-14 ${s.color} rounded-2xl flex items-center justify-center text-3xl shadow-lg`}>{s.icon}</div>
                         <div>
                           <h3 className="text-xl font-bold text-gray-800">{s.title}</h3>
-                          <p className="text-green-600 font-bold text-sm">চার্জ: {s.price} ৳</p>
+                          <p className="text-violet-600 font-bold text-sm">চার্জ: {s.price} ৳</p>
                         </div>
                       </div>
                       <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-5 text-center">
@@ -312,7 +322,7 @@ export default function DashboardPage() {
                       </div>
                       <div className="flex gap-3">
                         <button onClick={() => setActiveService(null)} className="flex-1 py-4 bg-gray-100 rounded-2xl font-bold text-gray-500">বাতিল</button>
-                        <Link href="/auth/login" className="flex-1 py-4 bg-[#1a7a3c] text-white rounded-2xl font-bold flex items-center justify-center gap-2 shadow-lg">
+                        <Link href="/auth/login" className="flex-1 py-4 bg-[#7c3aed] text-white rounded-2xl font-bold flex items-center justify-center gap-2 shadow-lg">
                           <LogIn size={18} /> লগিন
                         </Link>
                       </div>
@@ -326,16 +336,16 @@ export default function DashboardPage() {
                         <div className={`w-14 h-14 ${s.color} rounded-2xl flex items-center justify-center text-3xl shadow-lg`}>{s.icon}</div>
                         <div>
                           <h3 className="text-xl font-bold text-gray-800">{s.title}</h3>
-                          <p className="text-green-600 font-bold text-sm">চার্জ: {s.price} ৳</p>
+                          <p className="text-violet-600 font-bold text-sm">চার্জ: {s.price} ৳</p>
                         </div>
                       </div>
                       <div className="mb-5">
                         <label className="text-[10px] font-black text-gray-400 uppercase mb-1 block">প্রয়োজনীয় তথ্য (NID/নাম্বার/লিঙ্ক)</label>
-                        <input type="text" value={orderInput} onChange={e => setOrderInput(e.target.value)} placeholder="এখানে লিখুন..." className="w-full p-4 bg-gray-50 border-none rounded-2xl outline-none focus:ring-2 ring-green-500 shadow-inner" />
+                        <input type="text" value={orderInput} onChange={e => setOrderInput(e.target.value)} placeholder="এখানে লিখুন..." className="w-full p-4 bg-gray-50 border-none rounded-2xl outline-none focus:ring-2 ring-violet-500 shadow-inner" />
                       </div>
                       <div className="flex gap-3">
                         <button onClick={() => setActiveService(null)} className="flex-1 py-4 bg-gray-100 rounded-2xl font-bold text-gray-500">বাতিল</button>
-                        <button onClick={() => handlePlaceOrder(s)} disabled={submitting} className="flex-1 py-4 bg-[#1a7a3c] text-white rounded-2xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-green-200">
+                        <button onClick={() => handlePlaceOrder(s)} disabled={submitting} className="flex-1 py-4 bg-[#7c3aed] text-white rounded-2xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-violet-200">
                           {submitting ? 'লোড হচ্ছে...' : <><Send size={18} /> অর্ডার করুন</>}
                         </button>
                       </div>

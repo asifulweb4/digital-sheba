@@ -28,7 +28,7 @@ export default function OrdersPage() {
 
     const getStatusIcon = (status: string) => {
         switch (status) {
-            case 'completed': return <CheckCircle className="text-green-500" size={20} />;
+            case 'completed': return <CheckCircle className="text-violet-500" size={20} />;
             case 'pending': return <Clock className="text-yellow-500" size={20} />;
             case 'cancelled': return <XCircle className="text-red-500" size={20} />;
             default: return <AlertTriangle className="text-gray-500" size={20} />;
@@ -42,7 +42,7 @@ export default function OrdersPage() {
             {/* --- ড্যাশবোর্ডে ফিরে যাওয়ার বাটন --- */}
             <button
                 onClick={() => router.push('/dashboard')}
-                className="flex items-center gap-2 text-gray-500 hover:text-green-700 mb-6 text-sm font-bold"
+                className="flex items-center gap-2 text-gray-500 hover:text-violet-700 mb-6 text-sm font-bold"
             >
                 <ArrowLeft size={16} /> ড্যাশবোর্ডে ফিরে যান
             </button>
@@ -66,10 +66,10 @@ export default function OrdersPage() {
                                 </p>
                             </div>
                             <div className="text-right">
-                                <span className="font-bold text-green-700">{order.price} ৳</span>
+                                <span className="font-bold text-violet-700">{order.price} ৳</span>
                                 <div className="flex items-center gap-2 justify-end mt-1 text-sm font-medium">
                                     {getStatusIcon(order.status)}
-                                    <span className={`capitalize ${order.status === 'completed' ? 'text-green-600' : order.status === 'cancelled' ? 'text-red-600' : 'text-yellow-600'}`}>
+                                    <span className={`capitalize ${order.status === 'completed' ? 'text-violet-600' : order.status === 'cancelled' ? 'text-red-600' : 'text-yellow-600'}`}>
                                         {order.status === 'pending' ? 'অপেক্ষমাণ' : order.status === 'completed' ? 'সম্পন্ন' : order.status === 'cancelled' ? 'বাতিল' : order.status}
                                     </span>
                                 </div>

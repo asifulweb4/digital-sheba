@@ -33,7 +33,7 @@ export default function ProfilePage() {
             {/* --- ড্যাশবোর্ডে ফিরে যাওয়ার বাটন --- */}
             <button
                 onClick={() => router.push('/dashboard')}
-                className="flex items-center gap-2 text-gray-500 hover:text-green-700 mb-6 text-sm font-bold"
+                className="flex items-center gap-2 text-gray-500 hover:text-violet-700 mb-6 text-sm font-bold"
             >
                 <ArrowLeft size={16} /> ড্যাশবোর্ডে ফিরে যান
             </button>
@@ -43,7 +43,7 @@ export default function ProfilePage() {
 
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 max-w-lg">
                 <div className="flex items-center gap-4 mb-6">
-                    <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center text-green-700 text-3xl font-bold">
+                    <div className="w-16 h-16 rounded-full bg-violet-100 flex items-center justify-center text-violet-700 text-3xl font-bold">
                         {profile?.full_name?.charAt(0)}
                     </div>
                     <div>

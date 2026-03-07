@@ -16,6 +16,7 @@ export const services: Service[] = [
   { id: 'sign-copy', title: 'সাইন কপি', titleEn: 'Sign Copy', description: 'NID কার্ডের সাইন কপি সংগ্রহ', icon: '🖋️', color: 'bg-blue-500', category: 'nid', price: 18 },
   { id: 'nid-pdf', title: 'NID কার্ড PDF', titleEn: 'NID Card PDF', description: 'অরিজিনাল জাতীয় পরিচয়পত্রের PDF', icon: '🪪', color: 'bg-indigo-600', category: 'nid', price: 33, popular: true },
   { id: 'form-sign-copy', title: 'ফরম নং → সাইন কপি', titleEn: 'Form to Sign Copy', description: 'ফরম নাম্বার দিয়ে সাইন কপি সংগ্রহ', icon: '📝', color: 'bg-indigo-500', category: 'nid', price: 23 },
+  { id: 'nid-voter-number', title: 'NID ভোটার নাম্বার দিয়ে সার্ভিস', titleEn: 'NID service by Voter Number', description: 'ভোটার নাম্বার দিয়ে NID সেবা', icon: '🗳️', color: 'bg-teal-500', category: 'nid', price: 45 },
   { id: 'official-server-copy', title: 'অফিসিয়াল সার্ভার কপি', titleEn: 'Official Server Copy', description: 'সরকারি অফিসিয়াল সার্ভার কপি', icon: '🏛️', color: 'bg-blue-800', category: 'nid', price: 59 },
   { id: 'nid-correction', title: 'NID সংশোধন', titleEn: 'NID Correction', description: 'NID সংশোধন আবেদন', icon: '✏️', color: 'bg-blue-600', category: 'nid', price: 120 },
   { id: 'nid-address-change', title: 'NID ঠিকানা পরিবর্তন', titleEn: 'NID Address Change', description: 'জাতীয় পরিচয়পত্রের ঠিকানা আপডেট', icon: '🏠', color: 'bg-blue-300', category: 'nid', price: 80 },

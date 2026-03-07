@@ -17,11 +17,11 @@ export default function ServicesPage() {
   })
 
   return (
-    <div className="min-h-screen bg-[#f8fffe]">
+    <div className="min-h-screen bg-[#f8fafc]">
       <Navbar />
       <div className="hero-gradient py-16 text-center text-white">
         <h1 className="text-4xl font-bold mb-3">আমাদের সেবাসমূহ</h1>
-        <p className="text-green-100 text-lg">৩১+ সরকারি সেবা এক জায়গায়</p>
+        <p className="text-violet-100 text-lg">৪২+ সরকারি সেবা এক জায়গায়</p>
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="flex flex-col sm:flex-row gap-4 mb-6">
@@ -32,7 +32,7 @@ export default function ServicesPage() {
         </div>
         <div className="flex gap-2 flex-wrap mb-8">
           {categories.map(cat => (
-            <button key={cat.id} onClick={() => setActiveCategory(cat.id)} className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === cat.id ? 'bg-[#1a7a3c] text-white shadow-md' : 'bg-white text-gray-600 border border-gray-200 hover:border-[#1a7a3c]'}`}>
+            <button key={cat.id} onClick={() => setActiveCategory(cat.id)} className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === cat.id ? 'bg-[#7c3aed] text-white shadow-md' : 'bg-white text-gray-600 border border-gray-200 hover:border-[#7c3aed]'}`}>
               {cat.icon} {cat.label}
             </button>
           ))}

@@ -8,23 +8,23 @@
 
 html, body {
   font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
-  background: #f8fffe;
+  background: #f8fafc;
   overflow-x: hidden;
 }
 
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: #f1f1f1; }
-::-webkit-scrollbar-thumb { background: #1a7a3c; border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: #7c3aed; border-radius: 3px; }
 
-.hero-gradient { background: linear-gradient(135deg, #145a2e 0%, #1a7a3c 50%, #22c55e 100%); }
+.hero-gradient { background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 50%, #8b5cf6 100%); }
 
 .btn-primary {
-  background: linear-gradient(135deg, #1a7a3c, #22c55e);
+  background: linear-gradient(135deg, #7c3aed, #8b5cf6);
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(26,122,60,0.3);
 }
 .btn-primary:hover {
-  background: linear-gradient(135deg, #145a2e, #1a7a3c);
+  background: linear-gradient(135deg, #4c1d95, #7c3aed);
   transform: translateY(-1px);
   box-shadow: 0 6px 20px rgba(26,122,60,0.4);
 }
@@ -41,7 +41,7 @@ html, body {
 
 .spinner {
   border: 3px solid rgba(26,122,60,0.2);
-  border-top-color: #1a7a3c;
+  border-top-color: #7c3aed;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -49,7 +49,7 @@ html, body {
 
 input:focus, textarea:focus {
   outline: none;
-  border-color: #1a7a3c !important;
+  border-color: #7c3aed !important;
   box-shadow: 0 0 0 3px rgba(26,122,60,0.12);
 }
 

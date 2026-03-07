@@ -69,23 +69,23 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#f0fdf4] via-white to-[#dcfce7] flex">
+    <div className="min-h-screen bg-gradient-to-br from-[#f8fafc] via-white to-[#dcfce7] flex">
       {/* Left panel */}
       <div className="hidden lg:flex lg:w-1/2 hero-gradient flex-col justify-center items-center p-12 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-20 w-64 h-64 rounded-full bg-white blur-3xl"></div>
-          <div className="absolute bottom-20 right-20 w-48 h-48 rounded-full bg-green-300 blur-3xl"></div>
+          <div className="absolute bottom-20 right-20 w-48 h-48 rounded-full bg-violet-300 blur-3xl"></div>
         </div>
         <div className="relative z-10 text-white text-center">
           <div className="w-20 h-20 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-6">
             <span className="text-4xl font-bold">ড</span>
           </div>
           <h1 className="text-4xl font-bold mb-4">ডিজিটাল শেবা বিডি</h1>
-          <p className="text-green-100 text-lg mb-10 leading-relaxed">বাংলাদেশের সকল সরকারি সেবা এক জায়গায়</p>
+          <p className="text-violet-100 text-lg mb-10 leading-relaxed">বাংলাদেশের সকল সরকারি সেবা এক জায়গায়</p>
           <div className="space-y-4 text-left">
             {['NID ও স্মার্টকার্ড সেবা', 'জন্ম নিবন্ধন সেবা', 'TIN ও ট্যাক্স সেবা', '২৪/৭ কাস্টমার সাপোর্ট', 'সম্পূর্ণ বিনামূল্যে রেজিস্ট্রেশন'].map((item, i) => (
               <div key={i} className="flex items-center gap-3 text-white">
-                <CheckCircle size={20} className="text-green-300 flex-shrink-0" />
+                <CheckCircle size={20} className="text-violet-300 flex-shrink-0" />
                 <span>{item}</span>
               </div>
             ))}
@@ -100,11 +100,11 @@ export default function RegisterPage() {
           {/* Mobile logo */}
           <div className="lg:hidden text-center mb-8">
             <Link href="/" className="inline-flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#1a7a3c] to-[#22c55e] flex items-center justify-center shadow-lg">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#7c3aed] to-[#8b5cf6] flex items-center justify-center shadow-lg">
                 <span className="text-white font-bold text-xl">ড</span>
               </div>
               <div className="text-left">
-                <div className="text-[#1a7a3c] font-bold text-xl">ডিজিটাল শেবা</div>
+                <div className="text-[#7c3aed] font-bold text-xl">ডিজিটাল শেবা</div>
                 <div className="text-gray-400 text-xs">Digital Sheba BD</div>
               </div>
             </Link>
@@ -112,8 +112,8 @@ export default function RegisterPage() {
 
           {success ? (
             <div className="text-center animate-fade-in">
-              <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
-                <CheckCircle size={40} className="text-[#1a7a3c]" />
+              <div className="w-20 h-20 rounded-full bg-violet-100 flex items-center justify-center mx-auto mb-4">
+                <CheckCircle size={40} className="text-[#7c3aed]" />
               </div>
               <h2 className="text-2xl font-bold text-gray-800 mb-2">রেজিস্ট্রেশন সম্পন্ন! 🎉</h2>
               <p className="text-gray-500 mb-2">আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে</p>
@@ -190,9 +190,9 @@ export default function RegisterPage() {
 
                 {/* Terms */}
                 <div className="flex items-start gap-3">
-                  <input type="checkbox" name="agreeTerms" id="terms" checked={form.agreeTerms} onChange={handleChange} className="mt-0.5 w-4 h-4 accent-[#1a7a3c]" />
+                  <input type="checkbox" name="agreeTerms" id="terms" checked={form.agreeTerms} onChange={handleChange} className="mt-0.5 w-4 h-4 accent-[#7c3aed]" />
                   <label htmlFor="terms" className="text-sm text-gray-600 cursor-pointer">
-                    আমি <Link href="/terms" className="text-[#1a7a3c] hover:underline font-medium">শর্তাবলী</Link> ও <Link href="/privacy" className="text-[#1a7a3c] hover:underline font-medium">গোপনীয়তা নীতি</Link> মেনে নিচ্ছি
+                    আমি <Link href="/terms" className="text-[#7c3aed] hover:underline font-medium">শর্তাবলী</Link> ও <Link href="/privacy" className="text-[#7c3aed] hover:underline font-medium">গোপনীয়তা নীতি</Link> মেনে নিচ্ছি
                   </label>
                 </div>
 
@@ -208,7 +208,7 @@ export default function RegisterPage() {
 
                 <p className="text-center text-sm text-gray-500">
                   ইতিমধ্যে অ্যাকাউন্ট আছে?{' '}
-                  <Link href="/auth/login" className="text-[#1a7a3c] font-bold hover:underline">লগইন করুন</Link>
+                  <Link href="/auth/login" className="text-[#7c3aed] font-bold hover:underline">লগইন করুন</Link>
                 </p>
               </form>
             </>

@@ -18,11 +18,11 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f8fffe]">
+    <div className="min-h-screen bg-[#f8fafc]">
       <Navbar />
       <div className="hero-gradient py-16 text-center text-white">
         <h1 className="text-4xl font-bold mb-3">যোগাযোগ করুন</h1>
-        <p className="text-green-100">আমরা সবসময় আপনার সাহায্যে প্রস্তুত</p>
+        <p className="text-violet-100">আমরা সবসময় আপনার সাহায্যে প্রস্তুত</p>
       </div>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid lg:grid-cols-2 gap-12">
@@ -35,9 +35,9 @@ export default function ContactPage() {
                 { icon: MapPin, label: 'ঠিকানা', value: 'ঢাকা, বাংলাদেশ', href: '#' },
                 { icon: Clock, label: 'সময়', value: 'সকাল ৮টা - রাত ১০টা (৭ দিন)', href: '#' },
               ].map((item, i) => (
-                <a key={i} href={item.href} className="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm border border-gray-100 hover:border-[#1a7a3c] transition-colors">
+                <a key={i} href={item.href} className="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm border border-gray-100 hover:border-[#7c3aed] transition-colors">
                   <div className="w-12 h-12 bg-[#e8f5e9] rounded-xl flex items-center justify-center flex-shrink-0">
-                    <item.icon size={20} className="text-[#1a7a3c]" />
+                    <item.icon size={20} className="text-[#7c3aed]" />
                   </div>
                   <div>
                     <p className="text-xs text-gray-500">{item.label}</p>
@@ -50,8 +50,8 @@ export default function ContactPage() {
           <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
             {sent ? (
               <div className="text-center py-8">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <CheckCircle size={32} className="text-[#1a7a3c]" />
+                <div className="w-16 h-16 bg-violet-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle size={32} className="text-[#7c3aed]" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 mb-2">বার্তা পাঠানো হয়েছে!</h3>
                 <p className="text-gray-500">আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।</p>

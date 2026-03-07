@@ -63,11 +63,11 @@ export default function BalancePage() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-[#f0fdf4] via-white to-[#dcfce7] text-gray-800 p-4 sm:p-8 font-['Hind_Siliguri']">
+        <div className="min-h-screen bg-gradient-to-br from-[#f8fafc] via-white to-[#dcfce7] text-gray-800 p-4 sm:p-8 font-['Hind_Siliguri']">
             <div className="max-w-xl mx-auto">
                 {/* Header */}
                 <div className="text-center mb-10 pt-4">
-                    <h1 className="text-4xl font-bold text-[#1a7a3c] mb-3">ব্যালেন্স রিচার্জ করুন</h1>
+                    <h1 className="text-4xl font-bold text-[#7c3aed] mb-3">ব্যালেন্স রিচার্জ করুন</h1>
                     <p className="text-gray-500 text-sm font-medium">আপনার অ্যাকাউন্টে ব্যালেন্স যোগ করতে নিচের ফর্মটি পূরণ করুন</p>
                 </div>
 
@@ -76,30 +76,30 @@ export default function BalancePage() {
                     <div className="flex bg-gray-100/80 p-1.5 rounded-2xl mb-8">
                         <button
                             onClick={() => setAccountType('Personal')}
-                            className={`flex-1 py-3 rounded-xl font-bold transition-all ${accountType === 'Personal' ? 'bg-[#1a7a3c] text-white shadow-md' : 'text-gray-500 hover:text-gray-700'}`}
+                            className={`flex-1 py-3 rounded-xl font-bold transition-all ${accountType === 'Personal' ? 'bg-[#7c3aed] text-white shadow-md' : 'text-gray-500 hover:text-gray-700'}`}
                         >
                             Personal Account
                         </button>
                         <button
                             onClick={() => setAccountType('Business')}
-                            className={`flex-1 py-3 rounded-xl font-bold transition-all ${accountType === 'Business' ? 'bg-[#1a7a3c] text-white shadow-md' : 'text-gray-500 hover:text-gray-700'}`}
+                            className={`flex-1 py-3 rounded-xl font-bold transition-all ${accountType === 'Business' ? 'bg-[#7c3aed] text-white shadow-md' : 'text-gray-500 hover:text-gray-700'}`}
                         >
                             Business Account
                         </button>
                     </div>
 
                     {/* Notice Box */}
-                    <div className="bg-[#f0fdf4] border border-[#dcfce7] p-5 rounded-2xl mb-6 text-center">
+                    <div className="bg-[#f8fafc] border border-[#dcfce7] p-5 rounded-2xl mb-6 text-center">
                         {accountType === 'Personal' ? (
                             <>
                                 <p className="text-[#15803d] font-semibold text-sm mb-1">Personal অ্যাকাউন্টের জন্য সর্বনিম্ন</p>
-                                <p className="text-[#0f3d22] font-black text-3xl tracking-wide">৫০০ টাকা</p>
+                                <p className="text-[#2e1065] font-black text-3xl tracking-wide">৫০০ টাকা</p>
                                 <p className="text-[#15803d] text-xs mt-1">অ্যাড করতে হবে</p>
                             </>
                         ) : (
                             <>
                                 <p className="text-[#15803d] font-semibold text-sm mb-1">Business অ্যাকাউন্টের জন্য সর্বনিম্ন</p>
-                                <p className="text-[#0f3d22] font-black text-3xl tracking-wide">১,৪৫০ টাকা</p>
+                                <p className="text-[#2e1065] font-black text-3xl tracking-wide">১০০০ টাকা</p>
                                 <p className="text-[#15803d] text-xs mt-1">অ্যাড করতে হবে</p>
                             </>
                         )}
@@ -107,17 +107,17 @@ export default function BalancePage() {
 
 
                     {/* Sub Admin Offer Banner */}
-                    <div className="relative overflow-hidden bg-gradient-to-r from-[#0f3d22] to-[#1a7a3c] rounded-2xl p-5 mb-8 text-white">
+                    <div className="relative overflow-hidden bg-gradient-to-r from-[#2e1065] to-[#7c3aed] rounded-2xl p-5 mb-8 text-white">
                         <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-white/5 blur-2xl"></div>
                         <div className="relative flex items-start gap-4">
                             <div className="w-12 h-12 rounded-xl bg-white/15 flex items-center justify-center text-2xl flex-shrink-0">👑</div>
                             <div>
                                 <p className="font-bold text-base mb-1">সাব এডমিন হওয়ার সুযোগ!</p>
-                                <p className="text-green-100 text-sm leading-relaxed">
+                                <p className="text-violet-100 text-sm leading-relaxed">
                                     আমাদের একাউন্টে <span className="font-black text-white bg-white/20 px-2 py-0.5 rounded-lg">সাব এডমিন</span> নিতে চাইলে মাত্র
                                 </p>
-                                <p className="text-3xl font-black mt-2 text-green-300">২,৯৫০ ৳</p>
-                                <p className="text-green-200 text-xs mt-1">একবার যোগ করুন — সারাজীবন সুবিধা উপভোগ করুন</p>
+                                <p className="text-3xl font-black mt-2 text-violet-300">২,৯৫০ ৳</p>
+                                <p className="text-violet-200 text-xs mt-1">একবার যোগ করুন — সারাজীবন সুবিধা উপভোগ করুন</p>
                             </div>
                         </div>
                     </div>
@@ -134,7 +134,7 @@ export default function BalancePage() {
                                     onClick={() => handleCopy(paymentNumbers.bKash, 'bKash')}
                                     className="flex items-center gap-1.5 bg-white border border-gray-200 hover:bg-gray-50 px-2.5 py-1.5 rounded-lg text-xs font-medium text-gray-600 transition-colors shadow-sm"
                                 >
-                                    {copied === 'bKash' ? <CheckCircle size={14} className="text-[#1a7a3c]" /> : <Copy size={14} />}
+                                    {copied === 'bKash' ? <CheckCircle size={14} className="text-[#7c3aed]" /> : <Copy size={14} />}
                                     <span>Copy</span>
                                 </button>
                             </div>
@@ -149,7 +149,7 @@ export default function BalancePage() {
                                     onClick={() => handleCopy(paymentNumbers.Nagad, 'Nagad')}
                                     className="flex items-center gap-1.5 bg-white border border-gray-200 hover:bg-gray-50 px-2.5 py-1.5 rounded-lg text-xs font-medium text-gray-600 transition-colors shadow-sm"
                                 >
-                                    {copied === 'Nagad' ? <CheckCircle size={14} className="text-[#1a7a3c]" /> : <Copy size={14} />}
+                                    {copied === 'Nagad' ? <CheckCircle size={14} className="text-[#7c3aed]" /> : <Copy size={14} />}
                                     <span>Copy</span>
                                 </button>
                             </div>
@@ -166,7 +166,7 @@ export default function BalancePage() {
                                 <input
                                     type="tel"
                                     placeholder="01XXXXXXXXX"
-                                    className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#1a7a3c]/30 focus:border-[#1a7a3c] outline-none transition-all text-gray-800 placeholder-gray-400"
+                                    className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#7c3aed]/30 focus:border-[#7c3aed] outline-none transition-all text-gray-800 placeholder-gray-400"
                                     value={senderNumber}
                                     onChange={e => setSenderNumber(e.target.value)}
                                 />
@@ -181,7 +181,7 @@ export default function BalancePage() {
                                 <input
                                     type="email"
                                     placeholder="example@gmail.com"
-                                    className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#1a7a3c]/30 focus:border-[#1a7a3c] outline-none transition-all text-gray-800 placeholder-gray-400"
+                                    className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#7c3aed]/30 focus:border-[#7c3aed] outline-none transition-all text-gray-800 placeholder-gray-400"
                                     value={gmail}
                                     onChange={e => setGmail(e.target.value)}
                                 />
@@ -196,7 +196,7 @@ export default function BalancePage() {
                                 <input
                                     type="text"
                                     placeholder="TRX12345678"
-                                    className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#1a7a3c]/30 focus:border-[#1a7a3c] outline-none transition-all uppercase text-gray-800 placeholder-gray-400"
+                                    className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#7c3aed]/30 focus:border-[#7c3aed] outline-none transition-all uppercase text-gray-800 placeholder-gray-400"
                                     value={trxId}
                                     onChange={e => setTrxId(e.target.value)}
                                 />
@@ -211,7 +211,7 @@ export default function BalancePage() {
                                 <input
                                     type="number"
                                     placeholder={`Min ${accountType === 'Personal' ? 500 : 1000}`}
-                                    className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#1a7a3c]/30 focus:border-[#1a7a3c] outline-none transition-all text-gray-800 placeholder-gray-400"
+                                    className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#7c3aed]/30 focus:border-[#7c3aed] outline-none transition-all text-gray-800 placeholder-gray-400"
                                     value={depositAmount}
                                     onChange={e => setDepositAmount(e.target.value)}
                                 />
