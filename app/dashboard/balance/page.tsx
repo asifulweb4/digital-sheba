@@ -99,7 +99,7 @@ export default function BalancePage() {
                         ) : (
                             <>
                                 <p className="text-[#15803d] font-semibold text-sm mb-1">Business অ্যাকাউন্টের জন্য সর্বনিম্ন</p>
-                                <p className="text-[#2e1065] font-black text-3xl tracking-wide">১০০০ টাকা</p>
+                                <p className="text-[#2e1065] font-black text-3xl tracking-wide">১,৪৫০ টাকা</p>
                                 <p className="text-[#15803d] text-xs mt-1">অ্যাড করতে হবে</p>
                             </>
                         )}

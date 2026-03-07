@@ -40,7 +40,13 @@ export default function DashboardPage() {
         .eq('id', session.user.id)
         .single()
 
-      setProfile(profileData)
+      // Fallback to user_metadata if full_name is missing from profile
+      const fullName = profileData?.full_name || session.user.user_metadata?.full_name || 'User'
+      
+      setProfile({
+        ...profileData,
+        full_name: fullName
+      })
       setIsGuest(false)
       setLoading(false)
     }
@@ -169,7 +175,7 @@ export default function DashboardPage() {
               <div className="bg-[#7c3aed] rounded-xl p-4 text-white">
                 <p className="text-xs opacity-70">বর্তমান ব্যালেন্স</p>
                 <p className="text-2xl font-bold">{profile?.balance || 0} ৳</p>
-                <button onClick={() => setPaymentModalOpen(true)} className="mt-2 w-full bg-white text-violet-800 py-1.5 rounded-lg text-xs font-bold">রিচার্জ করুন</button>
+                <Link href="/dashboard/balance" className="mt-2 block text-center w-full bg-white text-violet-800 py-1.5 rounded-lg text-xs font-bold">রিচার্জ করুন</Link>
               </div>
             )}
           </div>
@@ -236,9 +242,9 @@ export default function DashboardPage() {
               <div className="relative z-10">
                 <h2 className="text-2xl font-black drop-shadow-sm mb-1 text-white/95">আস্সালামু আলাইকুম, {profile?.full_name?.split(' ')[0]}! <span className="inline-block animate-bounce_slow">👋</span></h2>
                 <p className="text-violet-100/90 text-sm sm:text-base mt-1 font-medium tracking-wide mb-5">আজকে আপনি কোন সরকারি সেবাটি নিতে চান?</p>
-                <button onClick={() => setPaymentModalOpen(true)} className="bg-white text-[#2e1065] px-6 py-2.5 rounded-2xl font-black text-sm shadow-[0_8px_20px_rgb(0,0,0,0.12)] hover:shadow-[0_12px_25px_rgb(0,0,0,0.2)] hover:-translate-y-1 transition-all flex items-center gap-2">
+                <Link href="/dashboard/balance" className="bg-white text-[#2e1065] px-6 py-2.5 rounded-2xl font-black text-sm shadow-[0_8px_20px_rgb(0,0,0,0.12)] hover:shadow-[0_12px_25px_rgb(0,0,0,0.2)] hover:-translate-y-1 transition-all inline-flex items-center gap-2">
                   <Wallet size={16} strokeWidth={2.5} /> ব্যালেন্স যোগ করুন
-                </button>
+                </Link>
               </div>
               <Wallet size={120} className="absolute right-[-10px] bottom-[-20px] opacity-[0.07] transform -rotate-12 hidden md:block" />
             </div>
