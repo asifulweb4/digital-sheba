@@ -1,11 +1,14 @@
-// app/services/page.tsx
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import { getAllServices } from '@/lib/queries'
 import ServicesClient from './ServicesClient'
 
+export const dynamic = 'force-dynamic'
+
 export default async function ServicesPage() {
   const data = await getAllServices()
+  // Serialize dates for client component
+  const serializedData = JSON.parse(JSON.stringify(data))
 
   return (
     <div className="min-h-screen bg-[#f8fafc]">
@@ -16,7 +19,7 @@ export default async function ServicesPage() {
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <ServicesClient initialServices={data} />
+        <ServicesClient initialServices={serializedData} />
       </div>
       
       <Footer />
