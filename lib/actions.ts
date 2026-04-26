@@ -3,6 +3,7 @@ import { db } from './db'
 import { profiles, orders, transactions } from './schema'
 import { eq, desc, sql } from 'drizzle-orm'
 import { cookies } from 'next/headers'
+import { revalidatePath } from 'next/cache'
 import { hashPassword, comparePassword, createToken, getSession } from './auth'
 
 // --- Custom Auth Actions ---
@@ -92,6 +93,7 @@ export async function placeOrderAction(service: { id: string, title: string, pri
                 status: 'pending',
             })
         })
+        revalidatePath('/dashboard')
         return { success: true }
     } catch (err) {
         console.error(err)
@@ -119,6 +121,7 @@ export async function addBalanceAction(amount: number, trxId: string, method: st
             description,
             status: 'pending',
         })
+        revalidatePath('/admin')
         return { success: true, message: 'রিচার্জ রিকোয়েস্ট সাবমিট হয়েছে' }
     } catch (err) {
         console.error(err)
@@ -147,14 +150,23 @@ export async function approveTransactionAction(id: number) {
             const txn = await tx.select().from(transactions).where(eq(transactions.id, id)).limit(1)
             if (txn.length === 0 || txn[0].status !== 'pending') throw new Error('Invalid Transaction')
 
+            const amount = Number(txn[0].amount)
+            const userPhone = txn[0].userId as string
+
+            // Update transaction status
             await tx.update(transactions).set({ status: 'approved' }).where(eq(transactions.id, id))
+
+            // Update profile balance using atomic addition
             await tx.update(profiles)
-                .set({ balance: sql`${profiles.balance} + ${txn[0].amount}` })
-                .where(eq(profiles.phone, txn[0].userId as string))
+                .set({ balance: sql`${profiles.balance} + ${amount}` })
+                .where(eq(profiles.phone, userPhone))
         })
+        
+        revalidatePath('/dashboard')
+        revalidatePath('/admin')
         return { success: true }
     } catch (err) {
-        console.error(err)
+        console.error('Approval error:', err)
         return { success: false }
     }
 }

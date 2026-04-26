@@ -111,7 +111,8 @@ export default function DashboardPage() {
         @media (min-width:500px)  { .service-grid { grid-template-columns:repeat(3,1fr); } }
         @media (min-width:768px)  { .service-grid { grid-template-columns:repeat(4,1fr); } }
         @media (min-width:1100px) { .service-grid { grid-template-columns:repeat(5,1fr); } }
-        .stats-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:22px; }
+        .stats-grid { display:grid; grid-template-columns:repeat(1,1fr); gap:12px; margin-bottom:22px; }
+        @media (min-width:640px) { .stats-grid { grid-template-columns:repeat(3,1fr); } }
         .stat-mini { border-radius:16px; padding:16px; border:1px solid rgba(6,79,59,0.08); background:#fff; transition:all 0.25s; }
         .db-search { width:100%; padding:10px 14px 10px 38px; border-radius:12px; border:1.5px solid rgba(6,79,59,0.14); background:rgba(240,253,244,0.7); font-size:13px; color:#064e3b; outline:none; transition:all 0.2s; }
         .modal-overlay { position:fixed; inset:0; z-index:60; display:flex; align-items:center; justify-content:center; padding:16px; background:rgba(2,44,34,0.55); backdrop-filter:blur(8px); }
@@ -190,22 +191,22 @@ export default function DashboardPage() {
             </div>
 
             <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 12 }}>
-              <div style={{ textAlign: 'right' }}>
-                <p style={{ fontSize: 13, fontWeight: 700, color: '#022c22', lineHeight: 1.2 }}>{profile?.fullName}</p>
-                <p style={{ fontSize: 11, color: '#059669', fontWeight: 600 }}>ব্যালেন্স: {profile?.balance || 0}৳</p>
+              <div style={{ textAlign: 'right', display: profile?.fullName ? 'block' : 'none' }}>
+                <p style={{ fontSize: 'clamp(11px, 3vw, 13px)', fontWeight: 700, color: '#022c22', lineHeight: 1.2 }}>{profile?.fullName}</p>
+                <p style={{ fontSize: 'clamp(9px, 2.5vw, 11px)', color: '#059669', fontWeight: 600 }}>ব্যালেন্স: {profile?.balance || 0}৳</p>
               </div>
-              <div style={{ width: 38, height: 38, borderRadius: 12, background: 'linear-gradient(135deg,#064e3b,#10b981)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 900 }}>
+              <div style={{ width: 38, height: 38, borderRadius: 12, background: 'linear-gradient(135deg,#064e3b,#10b981)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 900, flexShrink: 0 }}>
                 {profile?.fullName?.charAt(0)?.toUpperCase()}
               </div>
             </div>
           </header>
 
           <main style={{ flex: 1, padding: '24px 24px 40px', overflowY: 'auto', width: '100%' }}>
-            <div style={{ background: 'linear-gradient(135deg, #022c22 0%, #064e3b 40%, #065f46 70%, #047857 100%)', borderRadius: 24, padding: '28px', marginBottom: 24, position: 'relative', overflow: 'hidden' }}>
+            <div style={{ background: 'linear-gradient(135deg, #022c22 0%, #064e3b 40%, #065f46 70%, #047857 100%)', borderRadius: 24, padding: 'clamp(20px, 5vw, 28px)', marginBottom: 24, position: 'relative', overflow: 'hidden' }}>
               <div style={{ position: 'relative', zIndex: 1 }}>
-                <h2 style={{ fontSize: 26, fontWeight: 900, color: '#fff', marginBottom: 6 }}>আস্সালামু আলাইকুম, {profile?.fullName?.split(' ')[0]}! 👋</h2>
-                <p style={{ color: 'rgba(16,185,129,0.8)', fontSize: 14, marginBottom: 20 }}>আজকে আপনি কোন সরকারি সেবাটি নিতে চান?</p>
-                <Link href="/dashboard/balance" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'linear-gradient(135deg,#d97706,#f59e0b)', color: '#022c22', padding: '11px 22px', borderRadius: 14, fontSize: 13, fontWeight: 800, textDecoration: 'none' }}>
+                <h2 style={{ fontSize: 'clamp(20px, 6vw, 26px)', fontWeight: 900, color: '#fff', marginBottom: 6 }}>আস্সালামু আলাইকুম, {profile?.fullName?.split(' ')[0]}! 👋</h2>
+                <p style={{ color: 'rgba(16,185,129,0.8)', fontSize: 'clamp(12px, 3.5vw, 14px)', marginBottom: 20 }}>আজকে আপনি কোন সরকারি সেবাটি নিতে চান?</p>
+                <Link href="/dashboard/balance" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'linear-gradient(135deg,#d97706,#f59e0b)', color: '#022c22', padding: '10px 20px', borderRadius: 14, fontSize: 'clamp(11px, 3vw, 13px)', fontWeight: 800, textDecoration: 'none' }}>
                   <Wallet size={15} /> ব্যালেন্স যোগ করুন
                 </Link>
               </div>

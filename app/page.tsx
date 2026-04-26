@@ -60,7 +60,7 @@ export default function HomePage() {
       <Navbar />
 
 {/* ══════════════════════ HERO ═══════════════════════ */}
-      <section className="relative w-full h-[500px] overflow-hidden flex items-center justify-center">
+      <section className="relative w-full min-h-[500px] py-12 overflow-hidden flex items-center justify-center">
       
       {/* Background Image */}
       <Image 
@@ -166,8 +166,8 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════════ STATS ══════════════════════ */}
-      <section className="relative z-10 max-w-5xl mx-auto px-4 -mt-10">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <section className="relative z-10 max-w-5xl mx-auto px-4 -mt-10 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {stats.map(({ icon: Icon, value, label, gradFrom, gradTo }, i) => (
             <div
               key={i}

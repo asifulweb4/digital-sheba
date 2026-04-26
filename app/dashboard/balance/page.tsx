@@ -19,7 +19,7 @@ export default function RechargePage() {
     const [copied, setCopied] = useState<string | null>(null);
     const [submitting, setSubmitting] = useState(false);
 
-    const minAmount = accountType === "Personal" ? 500 : 1200;
+    const minAmount = accountType === "Personal" ? 500 : 1450;
 
     const paymentNumbers = {
         bKash: "01333378924",
@@ -64,7 +64,7 @@ export default function RechargePage() {
 
     return (
         <main style={{ minHeight: "100vh", background: "#f6fdf9" }}>
-            <div style={{ maxWidth: "680px", margin: "0 auto", padding: "60px 16px 100px" }}>
+            <div style={{ maxWidth: "680px", margin: "0 auto", padding: "clamp(24px, 5vw, 60px) 16px 100px" }}>
 
                 {/* Back Button */}
                 <button
@@ -73,7 +73,7 @@ export default function RechargePage() {
                         display: "flex", alignItems: "center", gap: "8px",
                         color: "#065f46", background: "none", border: "none",
                         cursor: "pointer", fontWeight: "800", fontSize: "14px",
-                        marginBottom: "32px", transition: "color 0.2s"
+                        marginBottom: "24px", transition: "color 0.2s"
                     }}
                     onMouseEnter={e => (e.currentTarget.style.color = "#059669")}
                     onMouseLeave={e => (e.currentTarget.style.color = "#065f46")}
@@ -242,16 +242,17 @@ export default function RechargePage() {
                                 {/* Price */}
                                 <div style={{
                                     display: "flex", alignItems: "baseline",
-                                    gap: "4px", marginBottom: "8px"
+                                    gap: "4px", marginBottom: "8px",
+                                    flexWrap: "wrap"
                                 }}>
                                     <span style={{
-                                        fontSize: "40px", fontWeight: "900", color: "white",
+                                        fontSize: "clamp(32px, 8vw, 40px)", fontWeight: "900", color: "white",
                                         letterSpacing: "-0.02em", lineHeight: 1
                                     }}>
                                         ২,৯৫০
                                     </span>
                                     <span style={{
-                                        fontSize: "24px", fontWeight: "900",
+                                        fontSize: "clamp(20px, 5vw, 24px)", fontWeight: "900",
                                         color: "rgba(255,255,255,0.9)"
                                     }}>
                                         ৳
