@@ -6,17 +6,15 @@ import { cookies } from 'next/headers'
 import { revalidatePath } from 'next/cache'
 import { hashPassword, comparePassword, createToken, getSession } from './auth'
 
-// --- Custom Auth Actions ---
+// --- Auth ---
 
 export async function registerAction(formData: any) {
     const { name, phone, password } = formData
-    
     let formattedPhone = phone.trim().replace(/\s/g, '')
     if (formattedPhone.startsWith('+88')) formattedPhone = formattedPhone.replace('+88', '')
-    
-    // Check if user exists
+
     const existing = await db.select().from(profiles).where(eq(profiles.phone, formattedPhone)).limit(1)
-    if (existing.length > 0) return { success: false, message: 'এই নম্বরটি ইতিমধ্যে ব্যবহার করা হয়েছে' }
+    if (existing.length > 0) return { success: false, message: 'এই নম্বরটি ইতিমধ্যে ব্যবহার করা হয়েছে' }
 
     try {
         const hashedPassword = await hashPassword(password)
@@ -30,28 +28,24 @@ export async function registerAction(formData: any) {
         return { success: true }
     } catch (err) {
         console.error(err)
-        return { success: false, message: 'রেজিস্ট্রেশন করতে সমস্যা হয়েছে' }
+        return { success: false, message: 'রেজিস্ট্রেশন করতে সমস্যা হয়েছে' }
     }
 }
 
 export async function loginAction(formData: any) {
     const { phone, password } = formData
-    
-    // Format phone: remove spaces and ensure it starts with 0
     let formattedPhone = phone.trim().replace(/\s/g, '')
     if (formattedPhone.startsWith('+88')) formattedPhone = formattedPhone.replace('+88', '')
 
     const user = await db.select().from(profiles).where(eq(profiles.phone, formattedPhone)).limit(1)
-    if (user.length === 0) return { success: false, message: 'অ্যাকাউন্ট পাওয়া যায়নি' }
+    if (user.length === 0) return { success: false, message: 'অ্যাকাউন্ট পাওয়া যায়নি' }
 
     const isMatch = await comparePassword(password, user[0].password)
     if (!isMatch) return { success: false, message: 'পাসওয়ার্ড ভুল' }
 
-    // Create Session
     const token = await createToken({ id: user[0].id, phone: user[0].phone, role: user[0].role })
     const cookieStore = await cookies()
     cookieStore.set('session', token, { httpOnly: true, secure: true, maxAge: 60 * 60 * 24 * 7 })
-
     return { success: true }
 }
 
@@ -60,7 +54,7 @@ export async function logoutAction() {
     cookieStore.delete('session')
 }
 
-// --- Profile Actions ---
+// --- Profile ---
 export async function getProfile() {
     const session = await getSession()
     if (!session) return null
@@ -68,7 +62,7 @@ export async function getProfile() {
     return user[0] || null
 }
 
-// --- Order Actions ---
+// --- Orders ---
 export async function placeOrderAction(service: { id: string, title: string, price: number }, inputData: string) {
     const session = await getSession()
     if (!session) return { success: false, message: 'লগইন করুন' }
@@ -80,8 +74,9 @@ export async function placeOrderAction(service: { id: string, title: string, pri
 
     try {
         await db.transaction(async (tx) => {
+            // ✅ Atomic balance deduction
             await tx.update(profiles)
-                .set({ balance: profile[0].balance - service.price })
+                .set({ balance: sql`${profiles.balance} - ${service.price}` })
                 .where(eq(profiles.id, (session as any).id))
 
             await tx.insert(orders).values({
@@ -91,45 +86,65 @@ export async function placeOrderAction(service: { id: string, title: string, pri
                 price: service.price,
                 inputData: inputData,
                 status: 'pending',
+                notes: '',
             })
         })
         revalidatePath('/dashboard')
         return { success: true }
     } catch (err) {
         console.error(err)
-        return { success: false, message: 'অর্ডার করতে সমস্যা হয়েছে' }
+        return { success: false, message: 'অর্ডার করতে সমস্যা হয়েছে' }
     }
 }
 
 export async function getOrdersAction() {
     const session = await getSession()
     if (!session) return []
-    return await db.select().from(orders).where(eq(orders.userId, (session as any).phone)).orderBy(desc(orders.createdAt))
+    return await db.select().from(orders)
+        .where(eq(orders.userId, (session as any).phone))
+        .orderBy(desc(orders.createdAt))
 }
 
-// --- Balance/Transaction Actions ---
+// --- Balance ---
+// ✅ Recharge করলে সাথে সাথে balance add হবে (auto approved)
 export async function addBalanceAction(amount: number, trxId: string, method: string, description: string) {
     const session = await getSession()
     if (!session) return { success: false, message: 'লগইন করুন' }
 
+    const userPhone = (session as any).phone
+    const userId = (session as any).id
+
     try {
-        await db.insert(transactions).values({
-            userId: (session as any).phone,
-            amount,
-            method,
-            trxId,
-            description,
-            status: 'pending',
+        await db.transaction(async (tx) => {
+            // Transaction record — auto approved
+            await tx.insert(transactions).values({
+                userId: userPhone,
+                amount,
+                method,
+                trxId,
+                description,
+                status: 'approved',
+            })
+
+            // ✅ সাথে সাথে balance add
+            await tx.update(profiles)
+                .set({ balance: sql`${profiles.balance} + ${amount}` })
+                .where(eq(profiles.id, userId))
         })
+
+        revalidatePath('/dashboard')
         revalidatePath('/admin')
-        return { success: true, message: 'রিচার্জ রিকোয়েস্ট সাবমিট হয়েছে' }
-    } catch (err) {
-        console.error(err)
-        return { success: false, message: 'এই TrxID টি আগে ব্যবহার হয়েছে' }
+        return { success: true, message: 'ব্যালেন্স সফলভাবে যোগ হয়েছে' }
+    } catch (err: any) {
+        console.error('addBalanceAction error:', err)
+        if (err?.message?.includes('unique') || err?.code === '23505') {
+            return { success: false, message: 'এই TrxID টি আগে ব্যবহার হয়েছে' }
+        }
+        return { success: false, message: 'ব্যালেন্স যোগ করতে সমস্যা হয়েছে' }
     }
 }
 
-// --- Admin Actions ---
+// --- Admin ---
 export async function getAdminStats() {
     const session = await getSession()
     if (!session || (session as any).role !== 'admin') return null
@@ -141,33 +156,33 @@ export async function getAdminStats() {
     return { transactions: allTransactions, orders: allOrders, users: allUsers }
 }
 
+// ✅ Admin manually approve — শুধু pending transactions এর জন্য
 export async function approveTransactionAction(id: number) {
     const session = await getSession()
     if (!session || (session as any).role !== 'admin') return { success: false }
 
     try {
-        await db.transaction(async (tx) => {
-            const txn = await tx.select().from(transactions).where(eq(transactions.id, id)).limit(1)
-            if (txn.length === 0 || txn[0].status !== 'pending') throw new Error('Invalid Transaction')
+        const txn = await db.select().from(transactions).where(eq(transactions.id, id)).limit(1)
+        if (txn.length === 0) return { success: false, message: 'Transaction not found' }
+        if (txn[0].status !== 'pending') return { success: false, message: 'Already processed' }
 
-            const amount = Number(txn[0].amount)
-            const userPhone = txn[0].userId as string
+        const amount = Number(txn[0].amount)
+        const userPhone = txn[0].userId as string
 
-            // Update transaction status
-            await tx.update(transactions).set({ status: 'approved' }).where(eq(transactions.id, id))
+        await db.update(transactions)
+            .set({ status: 'approved' })
+            .where(eq(transactions.id, id))
 
-            // Update profile balance using atomic addition
-            await tx.update(profiles)
-                .set({ balance: sql`${profiles.balance} + ${amount}` })
-                .where(eq(profiles.phone, userPhone))
-        })
-        
+        await db.update(profiles)
+            .set({ balance: sql`${profiles.balance} + ${amount}` })
+            .where(eq(profiles.phone, userPhone))
+
         revalidatePath('/dashboard')
         revalidatePath('/admin')
         return { success: true }
-    } catch (err) {
+    } catch (err: any) {
         console.error('Approval error:', err)
-        return { success: false }
+        return { success: false, message: err.message }
     }
 }
 
@@ -175,12 +190,20 @@ export async function rejectTransactionAction(id: number) {
     const session = await getSession()
     if (!session || (session as any).role !== 'admin') return { success: false }
     await db.update(transactions).set({ status: 'rejected' }).where(eq(transactions.id, id))
+    revalidatePath('/admin')
     return { success: true }
 }
 
+// ✅ Notes সহ order update
 export async function updateOrderAction(id: number, status: string, notes: string) {
     const session = await getSession()
     if (!session || (session as any).role !== 'admin') return { success: false }
-    await db.update(orders).set({ status }).where(eq(orders.id, id))
+
+    await db.update(orders)
+        .set({ status, notes })
+        .where(eq(orders.id, id))
+
+    revalidatePath('/admin')
+    revalidatePath('/dashboard')
     return { success: true }
 }
