@@ -166,21 +166,21 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════════ STATS ══════════════════════ */}
-      <section className="relative z-10 max-w-5xl mx-auto px-4 -mt-10 mb-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <section className="relative z-10 max-w-5xl mx-auto px-3 sm:px-4 -mt-12 sm:-mt-10 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
           {stats.map(({ icon: Icon, value, label, gradFrom, gradTo }, i) => (
             <div
               key={i}
-              className="stat-card relative bg-white rounded-2xl p-5 sm:p-6 text-center overflow-hidden transition-all duration-300 hover:-translate-y-1.5"
-              style={{ boxShadow: '0 4px 24px rgba(2,44,34,0.08)', border: '1px solid rgba(6,79,59,0.08)' }}
+              className="stat-card relative bg-white rounded-[20px] p-4 sm:p-6 text-center overflow-hidden transition-all duration-300 hover:-translate-y-1.5"
+              style={{ boxShadow: '0 4px 20px rgba(2,44,34,0.06)', border: '1px solid rgba(6,79,59,0.06)' }}
             >
               <div
-                className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-md transition-transform duration-300 group-hover:scale-110"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mx-auto mb-2 sm:mb-3 shadow-md transition-transform duration-300 group-hover:scale-110"
                 style={{ background: `linear-gradient(135deg, ${gradFrom}, ${gradTo})` }}>
-                <Icon size={20} className="text-white" strokeWidth={2.5} />
+                <Icon size={20} className="text-white w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />
               </div>
-              <div className="text-xl sm:text-2xl font-black leading-tight" style={{ color: '#022c22' }}>{value}</div>
-              <div className="text-xs mt-1 font-semibold" style={{ color: '#6b7280' }}>{label}</div>
+              <div className="text-lg sm:text-2xl font-black leading-tight" style={{ color: '#022c22' }}>{value}</div>
+              <div className="text-[10px] sm:text-xs mt-1 font-semibold" style={{ color: '#6b7280' }}>{label}</div>
             </div>
           ))}
         </div>
@@ -198,26 +198,26 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
           {coreServices.map((cs, i) => (
             <Link key={i} href="/dashboard"
-              className="group relative rounded-2xl p-6 overflow-hidden transition-all duration-300 hover:-translate-y-2"
+              className="group relative rounded-[20px] p-4 sm:p-6 overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col items-center sm:items-start text-center sm:text-left"
               style={{ background: cs.bg, border: `1px solid ${cs.border}`, boxShadow: '0 2px 14px rgba(2,44,34,0.06)' }}
             >
               {/* Tag */}
-              <span className="absolute top-4 right-4 px-2 py-0.5 rounded-full text-[10px] font-black"
+              <span className="absolute top-2 right-2 sm:top-4 sm:right-4 px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-black"
                 style={{ background: '#fff', color: cs.tagColor, border: `1px solid ${cs.border}` }}>
                 {cs.tag}
               </span>
 
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-4 shadow-sm group-hover:scale-110 transition-transform duration-300"
+              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center text-xl sm:text-2xl mb-2 sm:mb-4 shadow-sm group-hover:scale-110 transition-transform duration-300"
                 style={{ background: cs.iconBg }}>
                 {cs.icon}
               </div>
-              <h3 className="font-black mb-2 text-sm" style={{ color: '#022c22' }}>{cs.title}</h3>
-              <p className="text-xs leading-relaxed mb-3" style={{ color: '#6b7280' }}>{cs.desc}</p>
-              <div className="inline-flex items-center gap-1 text-xs font-bold" style={{ color: cs.tagColor }}>
-                আবেদন করুন <ArrowRight size={11} />
+              <h3 className="font-black mb-1 sm:mb-2 text-xs sm:text-sm" style={{ color: '#022c22' }}>{cs.title}</h3>
+              <p className="text-[10px] sm:text-xs leading-relaxed mb-2 sm:mb-3 hidden sm:block" style={{ color: '#6b7280' }}>{cs.desc}</p>
+              <div className="inline-flex items-center justify-center sm:justify-start gap-1 text-[10px] sm:text-xs font-bold w-full" style={{ color: cs.tagColor }}>
+                আবেদন <ArrowRight size={10} className="sm:w-3 sm:h-3" />
               </div>
             </Link>
           ))}

@@ -135,8 +135,8 @@ export default function DashboardPage() {
               <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
                 <div style={{ width: 38, height: 38, borderRadius: 12, background: 'linear-gradient(135deg,#10b981,#d97706)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18 }}>🇧🇩</div>
                 <div>
-                  <p style={{ color: '#fff', fontWeight: 800, fontSize: 14, lineHeight: 1.2 }}>নাগরিক সেবা</p>
-                  <p style={{ color: 'rgba(16,185,129,0.8)', fontSize: 10, fontWeight: 600, letterSpacing: '0.06em' }}>NAGARIK SHEBA</p>
+                  <p style={{ color: '#fff', fontWeight: 800, fontSize: 14, lineHeight: 1.2 }}>সহজ ডিজিটাল সেবা</p>
+                  <p style={{ color: 'rgba(16,185,129,0.8)', fontSize: 10, fontWeight: 600, letterSpacing: '0.06em' }}>SHOHOJ DIGITAL SHEBA</p>
                 </div>
               </Link>
             </div>
