@@ -73,22 +73,21 @@ export async function placeOrderAction(service: { id: string, title: string, pri
     }
 
     try {
-        await db.transaction(async (tx) => {
-            // ✅ Atomic balance deduction
-            await tx.update(profiles)
-                .set({ balance: sql`${profiles.balance} - ${service.price}` })
-                .where(eq(profiles.id, (session as any).id))
+        // ✅ transaction() ছাড়া — neon-http compatible
+        await db.update(profiles)
+            .set({ balance: sql`${profiles.balance} - ${service.price}` })
+            .where(eq(profiles.id, (session as any).id))
 
-            await tx.insert(orders).values({
-                userId: profile[0].phone,
-                serviceId: service.id,
-                serviceName: service.title,
-                price: service.price,
-                inputData: inputData,
-                status: 'pending',
-                notes: '',
-            })
+        await db.insert(orders).values({
+            userId: profile[0].phone,
+            serviceId: service.id,
+            serviceName: service.title,
+            price: service.price,
+            inputData: inputData,
+            status: 'pending',
+            notes: '',
         })
+
         revalidatePath('/dashboard')
         return { success: true }
     } catch (err) {
@@ -106,7 +105,7 @@ export async function getOrdersAction() {
 }
 
 // --- Balance ---
-// ✅ Recharge করলে সাথে সাথে balance add হবে (auto approved)
+// ✅ Recharge করলে সাথে সাথে balance add হবে
 export async function addBalanceAction(amount: number, trxId: string, method: string, description: string) {
     const session = await getSession()
     if (!session) return { success: false, message: 'লগইন করুন' }
@@ -115,22 +114,19 @@ export async function addBalanceAction(amount: number, trxId: string, method: st
     const userId = (session as any).id
 
     try {
-        await db.transaction(async (tx) => {
-            // Transaction record — auto approved
-            await tx.insert(transactions).values({
-                userId: userPhone,
-                amount,
-                method,
-                trxId,
-                description,
-                status: 'approved',
-            })
-
-            // ✅ সাথে সাথে balance add
-            await tx.update(profiles)
-                .set({ balance: sql`${profiles.balance} + ${amount}` })
-                .where(eq(profiles.id, userId))
+        // ✅ transaction() ছাড়া — neon-http compatible
+        await db.insert(transactions).values({
+            userId: userPhone,
+            amount,
+            method,
+            trxId,
+            description,
+            status: 'approved',
         })
+
+        await db.update(profiles)
+            .set({ balance: sql`${profiles.balance} + ${amount}` })
+            .where(eq(profiles.id, userId))
 
         revalidatePath('/dashboard')
         revalidatePath('/admin')
@@ -156,7 +152,7 @@ export async function getAdminStats() {
     return { transactions: allTransactions, orders: allOrders, users: allUsers }
 }
 
-// ✅ Admin manually approve — শুধু pending transactions এর জন্য
+// ✅ Admin manually approve
 export async function approveTransactionAction(id: number) {
     const session = await getSession()
     if (!session || (session as any).role !== 'admin') return { success: false }
