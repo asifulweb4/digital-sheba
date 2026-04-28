@@ -291,21 +291,21 @@ export default function HomePage() {
         </div>
 
         {/* Service grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+        <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 sm:gap-3">
           {filteredServices.map(s => (
             <Link key={s.id} href="/dashboard"
-              className="group bg-white rounded-2xl p-4 text-center transition-all duration-300 hover:-translate-y-1.5 relative overflow-hidden"
+              className="group bg-white rounded-xl sm:rounded-2xl p-2 sm:p-4 text-center transition-all duration-300 hover:-translate-y-1.5 relative overflow-hidden"
               style={{ boxShadow: '0 2px 12px rgba(2,44,34,0.06)', border: '1px solid rgba(6,79,59,0.08)' }}
             >
               {/* Hover glow */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl sm:rounded-2xl"
                 style={{ background: 'linear-gradient(135deg, rgba(236,253,245,0.9), rgba(209,250,229,0.6))' }} />
               <div className="relative">
-                <div className={`w-12 h-12 ${s.color} rounded-xl flex items-center justify-center text-xl mx-auto mb-2 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-sm`}>
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 ${s.color} rounded-lg sm:rounded-xl flex items-center justify-center text-lg sm:text-xl mx-auto mb-1.5 sm:mb-2 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-sm`}>
                   {s.icon}
                 </div>
-                <p className="text-xs font-bold leading-tight mb-2 line-clamp-2" style={{ color: '#022c22' }}>{s.title}</p>
-                <div className="price-tag">
+                <p className="text-[10px] sm:text-xs font-bold leading-tight mb-1.5 sm:mb-2 line-clamp-2" style={{ color: '#022c22' }}>{s.title}</p>
+                <div className="price-tag" style={{ padding: '0.15rem 0.4rem', fontSize: '0.6rem' }}>
                   <span className="mr-0.5 opacity-60">৳</span>{s.price}
                 </div>
               </div>

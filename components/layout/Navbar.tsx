@@ -22,7 +22,7 @@ export default function Navbar() {
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
     window.addEventListener('scroll', onScroll)
-    
+
     const fetchProfile = async () => {
       const data = await getProfile()
       setProfile(data)
@@ -52,8 +52,8 @@ export default function Navbar() {
           </span>
           <div className="flex items-center gap-2 ml-auto">
             <Phone size={11} style={{ color: '#fbbf24' }} />
-            <a href="tel:01880119330" className="font-bold tracking-wider transition-colors" style={{ color: '#fcd34d' }}>
-              01880119330
+            <a href="tel:01889079173" className="font-bold tracking-wider transition-colors" style={{ color: '#fcd34d' }}>
+              01889079173
             </a>
           </div>
         </div>

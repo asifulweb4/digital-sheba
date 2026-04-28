@@ -83,9 +83,9 @@ export default function DashboardPage() {
   ]
 
   const statCards = [
-    { label: 'মোট সেবা', value: services.length + '+', icon: '🏛️', color: 'rgba(16,185,129,0.12)', accent: '#059669' },
-    { label: 'চলমান অর্ডার', value: '০', icon: '⚡', color: 'rgba(245,158,11,0.12)', accent: '#d97706' },
-    { label: 'সফল অর্ডার', value: '০', icon: '✅', color: 'rgba(6,79,59,0.12)', accent: '#064e3b' },
+    { label: 'মোট সেবা', value: '৭২+', icon: '🏛️', color: 'rgba(16,185,129,0.12)', accent: '#059669', href: '/dashboard' },
+    { label: 'চলমান অর্ডার', value: '০', icon: '⚡', color: 'rgba(245,158,11,0.12)', accent: '#d97706', href: '/dashboard/orders' },
+    { label: 'সফল অর্ডার', value: '০', icon: '✅', color: 'rgba(6,79,59,0.12)', accent: '#064e3b', href: '/dashboard/orders' },
   ]
 
   return (
@@ -98,22 +98,23 @@ export default function DashboardPage() {
         .dash-sidebar { background: linear-gradient(170deg, #022c22 0%, #064e3b 45%, #065f46 100%); width:260px; flex-shrink:0; }
         .dash-root { display:flex; width:100%; min-height:100vh; background:#f6fdf9; overflow:hidden; }
         .dash-sidebar-wrapper { display:none; position:sticky; top:0; height:100vh; overflow-y:auto; }
+        .dash-sidebar-wrapper.mobile-open { display:flex !important; position:fixed !important; left:0; top:0; height:100vh; z-index:50; }
         @media (min-width:1024px) { .dash-sidebar-wrapper { display:flex; flex-direction:column; } }
-        .dash-main { flex:1; min-width:0; display:flex; flex-direction:column; width:100%; overflow-x:hidden; }
+        .dash-main { flex:1; min-width:0; display:flex; flex-direction:column; overflow-x:hidden; }
         .dash-main-toggle { display:flex; }
         @media (min-width:1024px) { .dash-main-toggle { display:none !important; } }
         .dash-nav-link { display:flex; align-items:center; gap:12px; padding:11px 16px; border-radius:12px; color:rgba(255,255,255,0.7); font-size:14px; font-weight:500; transition:all 0.25s; text-decoration:none; position:relative; }
         .dash-nav-link:hover { background:rgba(16,185,129,0.15); color:#10b981; }
         .dash-nav-link.active { background:rgba(16,185,129,0.2); color:#10b981; }
-        .service-card-db { background:#fff; border:1.5px solid rgba(6,79,59,0.09); border-radius:18px; padding:18px 12px 16px; display:flex; flex-direction:column; align-items:center; text-align:center; cursor:pointer; width:100%; transition:all 0.3s cubic-bezier(0.4,0,0.2,1); }
+        .service-card-db { background:#fff; border:1.5px solid rgba(6,79,59,0.09); border-radius:14px; padding:12px 6px 10px; display:flex; flex-direction:column; align-items:center; text-align:center; cursor:pointer; width:100%; transition:all 0.3s cubic-bezier(0.4,0,0.2,1); }
         .service-card-db:hover { transform:translateY(-5px); border-color:rgba(5,150,105,0.35); box-shadow:0 12px 35px rgba(6,79,59,0.14); }
-        .service-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; width:100%; }
-        @media (min-width:500px)  { .service-grid { grid-template-columns:repeat(3,1fr); } }
-        @media (min-width:768px)  { .service-grid { grid-template-columns:repeat(4,1fr); } }
-        @media (min-width:1100px) { .service-grid { grid-template-columns:repeat(5,1fr); } }
-        .stats-grid { display:grid; grid-template-columns:repeat(1,1fr); gap:12px; margin-bottom:22px; }
-        @media (min-width:640px) { .stats-grid { grid-template-columns:repeat(3,1fr); } }
-        .stat-mini { border-radius:16px; padding:16px; border:1px solid rgba(6,79,59,0.08); background:#fff; transition:all 0.25s; }
+        .service-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; width:100%; }
+        @media (min-width:640px)  { .service-grid { grid-template-columns:repeat(4,1fr); gap:12px; } }
+        @media (min-width:1024px) { .service-grid { grid-template-columns:repeat(5,1fr); } }
+        @media (min-width:1280px) { .service-grid { grid-template-columns:repeat(6,1fr); } }
+        .stats-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:22px; }
+        @media (min-width:640px) { .stats-grid { grid-template-columns:repeat(3,1fr); gap:12px; } }
+        .stat-mini { border-radius:14px; padding:12px; border:1px solid rgba(6,79,59,0.08); background:#fff; transition:all 0.25s; }
         .db-search { width:100%; padding:10px 14px 10px 38px; border-radius:12px; border:1.5px solid rgba(6,79,59,0.14); background:rgba(240,253,244,0.7); font-size:13px; color:#064e3b; outline:none; transition:all 0.2s; }
         .modal-overlay { position:fixed; inset:0; z-index:60; display:flex; align-items:center; justify-content:center; padding:16px; background:rgba(2,44,34,0.55); backdrop-filter:blur(8px); }
         .modal-box { background:#fff; border-radius:24px; width:100%; max-width:420px; padding:28px; box-shadow:0 30px 80px rgba(2,44,34,0.25); animation:fadeInUp 0.35s ease; }
@@ -128,7 +129,7 @@ export default function DashboardPage() {
           />
         )}
 
-        <aside className="dash-sidebar dash-sidebar-wrapper" style={{ zIndex: 50 }}>
+        <aside className={`dash-sidebar dash-sidebar-wrapper ${sidebarOpen ? 'mobile-open' : ''}`} style={{ zIndex: 50 }}>
           <div style={{ padding: '20px 20px 16px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -201,7 +202,7 @@ export default function DashboardPage() {
             </div>
           </header>
 
-          <main style={{ flex: 1, padding: '24px 24px 40px', overflowY: 'auto', width: '100%' }}>
+          <main style={{ flex: 1, padding: '24px 24px 40px', overflowY: 'auto', width: '100%', minWidth: 0 }}>
             <div style={{ background: 'linear-gradient(135deg, #022c22 0%, #064e3b 40%, #065f46 70%, #047857 100%)', borderRadius: 24, padding: 'clamp(20px, 5vw, 28px)', marginBottom: 24, position: 'relative', overflow: 'hidden' }}>
               <div style={{ position: 'relative', zIndex: 1 }}>
                 <h2 style={{ fontSize: 'clamp(20px, 6vw, 26px)', fontWeight: 900, color: '#fff', marginBottom: 6 }}>আস্সালামু আলাইকুম, {profile?.fullName?.split(' ')[0]}! 👋</h2>
@@ -214,24 +215,43 @@ export default function DashboardPage() {
 
             <div className="stats-grid">
               {statCards.map((s, i) => (
-                <div key={i} className="stat-mini">
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                    <div style={{ width: 44, height: 44, borderRadius: 13, background: s.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20 }}>{s.icon}</div>
+                <Link key={i} href={s.href} className="stat-mini" style={{ textDecoration: 'none', display: 'block', cursor: 'pointer' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexDirection: 'column', textAlign: 'center' }}>
+                    <div style={{ width: 36, height: 36, borderRadius: 10, background: s.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16 }}>{s.icon}</div>
                     <div>
-                      <p style={{ fontSize: 20, fontWeight: 900, color: '#022c22' }}>{s.value}</p>
-                      <p style={{ fontSize: 11, color: '#6b7280' }}>{s.label}</p>
+                      <p style={{ fontSize: 16, fontWeight: 900, color: '#022c22' }}>{s.value}</p>
+                      <p style={{ fontSize: 10, color: '#6b7280', whiteSpace: 'nowrap' }}>{s.label}</p>
                     </div>
                   </div>
-                </div>
+                </Link>
+              ))}
+            </div>
+
+            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '20px', width: '100%' }}>
+              {categories.map(cat => (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveCategory(cat.id)}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 14px',
+                    borderRadius: '99px', fontSize: '12px', fontWeight: 'bold', whiteSpace: 'nowrap',
+                    transition: 'all 0.2s', cursor: 'pointer',
+                    ...(activeCategory === cat.id
+                      ? { background: 'linear-gradient(135deg, #064e3b, #059669)', color: '#fff', boxShadow: '0 4px 12px rgba(5,150,105,0.3)', border: 'none' }
+                      : { background: '#fff', color: '#374151', border: '1px solid rgba(6,79,59,0.15)' })
+                  }}
+                >
+                  <span style={{ fontSize: '14px' }}>{cat.icon}</span> {cat.label}
+                </button>
               ))}
             </div>
 
             <div className="service-grid">
               {filteredServices.map((service: any) => (
                 <button key={service.id} onClick={() => setActiveService(service.id)} className="service-card-db">
-                  <div className={service.color} style={{ width: 60, height: 60, borderRadius: 18, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 28, marginBottom: 12 }}>{service.icon}</div>
-                  <p style={{ fontSize: 12.5, fontWeight: 700, color: '#1f2937', marginBottom: 10 }}>{service.title}</p>
-                  <div style={{ display: 'inline-flex', alignItems: 'center', background: '#ecfdf5', color: '#065f46', borderRadius: 99, padding: '4px 12px', fontSize: 11, fontWeight: 800 }}>৳ {service.price}</div>
+                  <div className={service.color} style={{ width: 42, height: 42, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, marginBottom: 8 }}>{service.icon}</div>
+                  <p style={{ fontSize: 10, fontWeight: 700, color: '#1f2937', marginBottom: 8, lineHeight: 1.3 }}>{service.title}</p>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', background: '#ecfdf5', color: '#065f46', borderRadius: 99, padding: '2px 8px', fontSize: 10, fontWeight: 800 }}>৳ {service.price}</div>
                 </button>
               ))}
             </div>
