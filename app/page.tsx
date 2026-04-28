@@ -89,10 +89,10 @@ export default function HomePage() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full pointer-events-none"
           style={{ background: 'radial-gradient(circle, rgba(5,150,105,0.07) 0%, transparent 55%)' }} />
 
-        <div className="relative max-w-4xl mx-auto px-4 pt-8 pb-20 sm:pt-24 sm:pb-36 text-center text-white">
+        <div className="relative max-w-4xl mx-auto px-4 pt-4 pb-16 sm:pt-24 sm:pb-36 text-center text-white">
 
           {/* Shimmer badge */}
-          <div className="inline-flex items-center gap-2 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-7 animate-fade-up border"
+          <div className="inline-flex items-center gap-1.5 px-3 sm:px-5 py-1 sm:py-2 rounded-full mb-3 sm:mb-7 animate-fade-up border"
             style={{
               background: 'linear-gradient(90deg, rgba(245,158,11,0.15) 25%, rgba(251,191,36,0.32) 50%, rgba(245,158,11,0.15) 75%)',
               backgroundSize: '200% auto',
@@ -101,32 +101,32 @@ export default function HomePage() {
               color: '#fde68a',
             }}>
             <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full animate-pulse" style={{ background: '#fbbf24' }} />
-            <span className="text-[11px] sm:text-sm font-bold tracking-wide">🇧🇩 বাংলাদেশের সহজ ডিজিটাল সেবা প্ল্যাটফর্ম</span>
+            <span className="text-[10px] sm:text-sm font-bold tracking-wide">🇧🇩 বাংলাদেশের সহজ ডিজিটাল সেবা প্ল্যাটফর্ম</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black mb-3 sm:mb-4 leading-[1.1] tracking-tight animate-float glow-green">
+          <h1 className="text-3xl sm:text-6xl md:text-7xl font-black mb-2 sm:mb-4 leading-[1.15] tracking-tight animate-float glow-green">
             সহজ ডিজিটাল সেবা
           </h1>
 
           {/* Gold accent line */}
-          <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-5">
-            <div className="h-px w-10 sm:w-16 rounded-full" style={{ background: 'linear-gradient(90deg, transparent, #d97706)' }} />
-            <span className="text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase" style={{ color: '#fcd34d' }}>সহজ · দ্রুত · নির্ভরযোগ্য</span>
-            <div className="h-px w-10 sm:w-16 rounded-full" style={{ background: 'linear-gradient(270deg, transparent, #d97706)' }} />
+          <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-5">
+            <div className="h-px w-8 sm:w-16 rounded-full" style={{ background: 'linear-gradient(90deg, transparent, #d97706)' }} />
+            <span className="text-[9px] sm:text-xs font-bold tracking-[0.2em] uppercase" style={{ color: '#fcd34d' }}>সহজ · দ্রুত · নির্ভরযোগ্য</span>
+            <div className="h-px w-8 sm:w-16 rounded-full" style={{ background: 'linear-gradient(270deg, transparent, #d97706)' }} />
           </div>
 
-          <p className="text-emerald-200 text-sm sm:text-xl mb-1.5 sm:mb-2 font-semibold animate-fade-up" style={{ animationDelay: '0.1s' }}>
+          <p className="text-emerald-200 text-xs sm:text-xl mb-1 sm:mb-2 font-semibold animate-fade-up" style={{ animationDelay: '0.1s' }}>
             ৬ লাখ+ ব্যবহারকারী আমাদের সাথে যুক্ত
           </p>
-          <p className="text-emerald-300/80 text-[11px] sm:text-lg mb-6 sm:mb-10 animate-fade-up" style={{ animationDelay: '0.2s' }}>
+          <p className="text-emerald-300/80 text-[10px] sm:text-lg mb-4 sm:mb-10 animate-fade-up" style={{ animationDelay: '0.2s' }}>
             NID, স্মার্টকার্ড, TIN সহ ৪২টিরও বেশি সরকারি সেবা — এখন ঘরে বসেই
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-row items-center justify-center gap-3 sm:gap-4 animate-fade-up" style={{ animationDelay: '0.3s' }}>
+          <div className="flex flex-row items-center justify-center gap-2.5 sm:gap-4 animate-fade-up" style={{ animationDelay: '0.3s' }}>
             <Link
               href="/auth/register"
-              className="group inline-flex items-center gap-2.5 px-9 py-4 rounded-2xl font-black text-lg transition-all duration-300 hover:-translate-y-1"
+              className="group inline-flex justify-center items-center gap-1.5 px-4 sm:px-9 py-2.5 sm:py-4 rounded-xl sm:rounded-2xl font-black text-xs sm:text-lg transition-all duration-300 hover:-translate-y-1"
               style={{
                 background: 'linear-gradient(135deg, #d97706, #f59e0b)',
                 color: '#022c22',
@@ -134,11 +134,11 @@ export default function HomePage() {
               }}
             >
               ফ্রি একাউন্ট খুলুন
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              <ArrowRight size={14} className="sm:w-[18px] sm:h-[18px] group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-base border backdrop-blur-sm transition-all duration-300 hover:bg-white/20"
+              className="inline-flex justify-center items-center gap-1.5 px-4 sm:px-8 py-2.5 sm:py-4 rounded-xl sm:rounded-2xl font-bold text-[11px] sm:text-base border backdrop-blur-sm transition-all duration-300 hover:bg-white/20"
               style={{ background: 'rgba(255,255,255,0.08)', borderColor: 'rgba(255,255,255,0.22)', color: '#fff' }}
             >
               সেবাসমূহ দেখুন
@@ -146,10 +146,10 @@ export default function HomePage() {
           </div>
 
           {/* Service chips */}
-          <div className="flex flex-wrap justify-center gap-2.5 mt-10 animate-fade-up" style={{ animationDelay: '0.4s' }}>
+          <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2.5 mt-5 sm:mt-10 animate-fade-up" style={{ animationDelay: '0.4s' }}>
             {['🪪 NID সেবা', '💳 স্মার্টকার্ড', '📋 জন্ম নিবন্ধন', '📄 TIN', '✅ ১০০% নিরাপদ', '⚡ দ্রুত সেবা'].map(chip => (
               <span key={chip}
-                className="px-3.5 py-1.5 rounded-full text-xs font-semibold backdrop-blur-sm"
+                className="px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[9px] sm:text-xs font-semibold backdrop-blur-sm"
                 style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', color: '#d1fae5' }}>
                 {chip}
               </span>
@@ -159,14 +159,14 @@ export default function HomePage() {
 
         {/* Wavy bottom */}
         <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
-          <svg viewBox="0 0 1440 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="w-full h-[40px] sm:h-[90px]">
+          <svg viewBox="0 0 1440 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="w-full h-[20px] sm:h-[90px]">
             <path d="M0,45 C360,90 720,0 1080,45 C1260,68 1380,18 1440,45 L1440,90 L0,90 Z" fill="#f6fdf9" />
           </svg>
         </div>
       </section>
 
       {/* ══════════════════════ STATS ══════════════════════ */}
-      <section className="relative z-10 max-w-5xl mx-auto px-3 sm:px-4 -mt-16 sm:-mt-10 mb-8">
+      <section className="relative z-10 max-w-5xl mx-auto px-3 sm:px-4 -mt-20 sm:-mt-10 mb-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
           {stats.map(({ icon: Icon, value, label, gradFrom, gradTo }, i) => (
             <div
