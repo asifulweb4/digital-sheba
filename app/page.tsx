@@ -60,7 +60,7 @@ export default function HomePage() {
       <Navbar />
 
 {/* ══════════════════════ HERO ═══════════════════════ */}
-      <section className="relative w-full min-h-[500px] py-12 overflow-hidden flex items-center justify-center">
+      <section className="relative w-full min-h-[350px] sm:min-h-[500px] py-4 sm:py-12 overflow-hidden flex items-center justify-center">
       
       {/* Background Image */}
       <Image 
@@ -89,7 +89,7 @@ export default function HomePage() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full pointer-events-none"
           style={{ background: 'radial-gradient(circle, rgba(5,150,105,0.07) 0%, transparent 55%)' }} />
 
-        <div className="relative max-w-4xl mx-auto px-4 pt-4 pb-16 sm:pt-24 sm:pb-36 text-center text-white">
+        <div className="relative max-w-4xl mx-auto px-4 pt-1 pb-8 sm:pt-24 sm:pb-36 text-center text-white">
 
           {/* Shimmer badge */}
           <div className="inline-flex items-center gap-1.5 px-3 sm:px-5 py-1 sm:py-2 rounded-full mb-3 sm:mb-7 animate-fade-up border"
@@ -109,10 +109,10 @@ export default function HomePage() {
           </h1>
 
           {/* Gold accent line */}
-          <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-5">
-            <div className="h-px w-8 sm:w-16 rounded-full" style={{ background: 'linear-gradient(90deg, transparent, #d97706)' }} />
-            <span className="text-[9px] sm:text-xs font-bold tracking-[0.2em] uppercase" style={{ color: '#fcd34d' }}>সহজ · দ্রুত · নির্ভরযোগ্য</span>
-            <div className="h-px w-8 sm:w-16 rounded-full" style={{ background: 'linear-gradient(270deg, transparent, #d97706)' }} />
+          <div className="flex items-center justify-center gap-1.5 sm:gap-3 mb-2 sm:mb-5">
+            <div className="h-px w-6 sm:w-16 rounded-full" style={{ background: 'linear-gradient(90deg, transparent, #d97706)' }} />
+            <span className="text-[8px] sm:text-xs font-bold tracking-[0.2em] uppercase" style={{ color: '#fcd34d' }}>সহজ · দ্রুত · নির্ভরযোগ্য</span>
+            <div className="h-px w-6 sm:w-16 rounded-full" style={{ background: 'linear-gradient(270deg, transparent, #d97706)' }} />
           </div>
 
           <p className="text-emerald-200 text-xs sm:text-xl mb-1 sm:mb-2 font-semibold animate-fade-up" style={{ animationDelay: '0.1s' }}>
@@ -146,10 +146,10 @@ export default function HomePage() {
           </div>
 
           {/* Service chips */}
-          <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2.5 mt-5 sm:mt-10 animate-fade-up" style={{ animationDelay: '0.4s' }}>
-            {['🪪 NID সেবা', '💳 স্মার্টকার্ড', '📋 জন্ম নিবন্ধন', '📄 TIN', '✅ ১০০% নিরাপদ', '⚡ দ্রুত সেবা'].map(chip => (
+          <div className="flex flex-wrap justify-center gap-1 sm:gap-2.5 mt-3 sm:mt-10 animate-fade-up" style={{ animationDelay: '0.4s' }}>
+            {['🪪 NID', '💳 স্মার্টকার্ড', '📋 জন্ম নিবন্ধন', '📄 TIN', '✅ ১০০% নিরাপদ', '⚡ দ্রুত'].map(chip => (
               <span key={chip}
-                className="px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[9px] sm:text-xs font-semibold backdrop-blur-sm"
+                className="px-2 py-0.5 sm:px-3.5 sm:py-1.5 rounded-full text-[8px] sm:text-xs font-semibold backdrop-blur-sm"
                 style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', color: '#d1fae5' }}>
                 {chip}
               </span>
