@@ -22,7 +22,7 @@ export default function RechargePage() {
     const minAmount = accountType === "Personal" ? 500 : 1450;
 
     const paymentNumbers = {
-        bKash: "01333378924",
+        bKash: "01313975821",
         Nagad: ""
     };
 
