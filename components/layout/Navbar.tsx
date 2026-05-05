@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Menu, X, Phone, LogIn, UserPlus, LogOut, LayoutDashboard, ShieldCheck } from 'lucide-react'
 import { getProfile, logoutAction } from '@/lib/actions'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 const navLinks = [
   { href: '/', label: 'হোম' },
@@ -62,15 +63,23 @@ export default function Navbar() {
       <div className="bg-white/96 backdrop-blur-xl" style={{ borderBottom: '1px solid rgba(6,79,59,0.10)', boxShadow: scrolled ? '0 4px 28px rgba(2,44,34,0.12)' : 'none' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-[68px]">
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="w-11 h-11 rounded-2xl flex items-center justify-center shadow-green-sm group-hover:shadow-green-md transition-all duration-300" style={{ background: 'linear-gradient(135deg, #064e3b, #059669)' }}>
-                <span className="text-white font-black text-xl">স</span>
-              </div>
-              <div>
-                <div className="font-black text-lg leading-tight" style={{ color: '#064e3b' }}>সহজ ডিজিটাল সেবা</div>
-                <div className="text-xs font-semibold tracking-widest uppercase" style={{ color: '#059669' }}>Shohoj Digital Sheba</div>
-              </div>
-            </Link>
+           
+                     <Link href="/" style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    textDecoration: "none",
+                    flexShrink: 0,
+                }}>
+                    <Image
+                        src="/logo.jpeg"
+                        alt="Nagarik Seba Logo"
+                        width={65}
+                        height={65}
+                        style={{ objectFit: "contain", borderRadius: "50%" }}
+                    />
+                </Link>
+                
 
             <div className="hidden md:flex items-center gap-1">
               {navLinks.map(l => (
