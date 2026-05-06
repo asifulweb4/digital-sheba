@@ -110,7 +110,7 @@ export default function RechargePage() {
         if (!res.success) {
             setWithdrawError(res.message || "উইথড্র রিকোয়েস্ট ব্যর্থ হয়েছে। আবার চেষ্টা করুন।");
         } else {
-            alert("✅ উইথড্র রিকোয়েস্ট সাবমিট হয়েছে! এডমিন ভেরিফাই করার পর আপনার নম্বরে টাকা পাঠানো হবে।");
+            alert("✅ উইথড্র রিকোয়েস্ট সাবমিটের সাথে সাথে আপনার ওয়ালেট টাকা যোগ হবে");
             setWithdrawForm({ receiverNumber: "", amount: "" });
             router.push("/dashboard");
         }
@@ -560,8 +560,7 @@ export default function RechargePage() {
                             }}>
                                 <AlertTriangle size={20} color="#d97706" style={{ flexShrink: 0, marginTop: "2px" }} />
                                 <p style={{ fontSize: "13px", fontWeight: "700", color: "#92400e", margin: 0, lineHeight: 1.6 }}>
-                                    উইথড্র রিকোয়েস্ট সাবমিটের পর এডমিন ভেরিফাই করবেন।{" "}
-                                    <span style={{ color: "#b45309" }}>১–২৪ ঘণ্টার মধ্যে</span> আপনার নম্বরে টাকা পাঠানো হবে।
+                                    উইথড্র রিকোয়েস্ট সাবমিটের সাথে সাথে আপনার ওয়ালেট টাকা যোগ হবে
                                 </p>
                             </div>
 
