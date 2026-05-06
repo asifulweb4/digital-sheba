@@ -190,6 +190,45 @@ export async function rejectTransactionAction(id: number) {
     return { success: true }
 }
 
+// --- Withdraw ---
+export async function withdrawBalanceAction(amount: number, method: string, receiverNumber: string) {
+    const session = await getSession()
+    if (!session) return { success: false, message: 'লগইন করুন' }
+
+    const userPhone = (session as any).phone
+    const userId = (session as any).id
+
+    // Balance চেক
+    const profile = await db.select().from(profiles).where(eq(profiles.id, userId)).limit(1)
+    if (profile.length === 0 || profile[0].balance < amount) {
+        return { success: false, message: 'পর্যাপ্ত ব্যালেন্স নেই' }
+    }
+
+    try {
+        // Balance কাটো
+        await db.update(profiles)
+            .set({ balance: sql`${profiles.balance} - ${amount}` })
+            .where(eq(profiles.id, userId))
+
+        // Transaction record করো (pending — admin approve করবে)
+        await db.insert(transactions).values({
+            userId: userPhone,
+            amount,
+            method,
+            trxId: `WD-${Date.now()}-${userId}`,
+            description: `Withdraw: ${method}, Receiver: ${receiverNumber}`,
+            status: 'pending',
+        })
+
+        revalidatePath('/dashboard')
+        revalidatePath('/admin')
+        return { success: true }
+    } catch (err: any) {
+        console.error('withdrawBalanceAction error:', err)
+        return { success: false, message: 'উইথড্র করতে সমস্যা হয়েছে' }
+    }
+}
+
 // ✅ Notes সহ order update
 export async function updateOrderAction(id: number, status: string, notes: string) {
     const session = await getSession()
