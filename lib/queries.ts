@@ -10,6 +10,6 @@ export async function getAllServices() {
     }));
   } catch (error) {
     console.error('Error fetching services:', error);
-    return [];
+    return []; // ✅ এরর হলে খালি array return করবে, crash করবে না
   }
 }
