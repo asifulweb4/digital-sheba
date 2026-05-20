@@ -1,12 +1,19 @@
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-import { getAllServices } from '@/lib/queries'
 import ServicesClient from './ServicesClient'
 
 export const dynamic = 'force-dynamic'
 
 export default async function ServicesPage() {
-  const data = await getAllServices()
+  let data: any[] = []
+
+  try {
+    const { getAllServices } = await import('@/lib/queries')
+    data = await getAllServices()
+  } catch (error) {
+    console.error('Services fetch failed:', error)
+    data = []
+  }
 
   return (
     <div className="min-h-screen bg-[#f8fafc]">
