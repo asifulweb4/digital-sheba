@@ -1,4 +1,4 @@
-export interface Service {
+export type Service = {
   id: string
   title: string
   titleEn: string
@@ -8,8 +8,8 @@ export interface Service {
   category: string
   price: number
   popular?: boolean
-  inputLabel?: string
-  inputPlaceholder?: string
+  inputLabel: string
+  inputPlaceholder: string
 }
 
 export const services: Service[] = [

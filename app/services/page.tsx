@@ -7,8 +7,6 @@ export const dynamic = 'force-dynamic'
 
 export default async function ServicesPage() {
   const data = await getAllServices()
-  // Serialize dates for client component
-  const serializedData = JSON.parse(JSON.stringify(data))
 
   return (
     <div className="min-h-screen bg-[#f8fafc]">
@@ -17,11 +15,9 @@ export default async function ServicesPage() {
         <h1 className="text-4xl font-bold mb-3">আমাদের সেবাসমূহ</h1>
         <p className="text-violet-100 text-lg">৪২+ সরকারি সেবা এক জায়গায়</p>
       </div>
-      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <ServicesClient initialServices={serializedData} />
+        <ServicesClient initialServices={data} />
       </div>
-      
       <Footer />
     </div>
   )

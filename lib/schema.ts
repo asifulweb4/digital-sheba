@@ -1,4 +1,4 @@
-import { pgTable, serial, text, timestamp, integer } from 'drizzle-orm/pg-core';
+import { pgTable, serial, text, timestamp, integer, boolean } from 'drizzle-orm/pg-core';
 
 export const profiles = pgTable('profiles', {
   id: serial('id').primaryKey(),
@@ -31,13 +31,23 @@ export const orders = pgTable('orders', {
   price: integer('price').notNull(),
   inputData: text('input_data').notNull(),
   status: text('status').default('pending').notNull(),
-  notes: text('notes').default(''),        // ✅ admin delivery note
+  notes: text('notes').default(''),
   createdAt: timestamp('created_at').defaultNow(),
 });
 
+// ✅ সম্পূর্ণ নতুন services table
 export const services = pgTable('services', {
   id: serial('id').primaryKey(),
-  name: text('name').notNull(),
+  serviceId: text('service_id').notNull().unique(),
+  title: text('title').notNull(),
+  titleEn: text('title_en').notNull(),
   description: text('description'),
+  category: text('category').default('other'),
+  icon: text('icon').default('📄'),
+  color: text('color').default('bg-gray-100'),
+  price: integer('price').default(0),
+  popular: boolean('popular').default(false),
+  inputLabel: text('input_label'),
+  inputPlaceholder: text('input_placeholder'),
   createdAt: timestamp('created_at').defaultNow(),
 });
