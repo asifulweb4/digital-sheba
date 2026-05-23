@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Copy, CheckCircle, Smartphone, Hash, Wallet, Zap, ShieldCheck, AlertTriangle, ArrowDownCircle, ArrowUpCircle } from "lucide-react";
 import { addBalanceAction } from "@/lib/actions";
-import {  withdrawBalanceAction } from "@/lib/actions";
+import { withdrawBalanceAction } from "@/lib/actions";
 
 // Replace with your real withdraw action:
 // import { withdrawBalanceAction } from "@/lib/actions";
@@ -43,7 +43,7 @@ export default function RechargePage() {
     const maxWithdraw = 10000;
 
     const paymentNumbers = {
-        bKash: "01636208150",
+        bKash: "01762728057",
         Nagad: ""
     };
 
@@ -102,7 +102,7 @@ export default function RechargePage() {
 
         // ── Replace with your real action ──
         const res = await withdrawBalanceAction(amountNum, withdrawMethod, withdrawForm.receiverNumber.trim());
-        
+
         // ────────────────────────────────────
 
         setWithdrawSubmitting(false);
