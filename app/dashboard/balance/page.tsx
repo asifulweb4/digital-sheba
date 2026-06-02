@@ -43,7 +43,7 @@ export default function RechargePage() {
     const maxWithdraw = 10000;
 
     const paymentNumbers = {
-        bKash: "01762728057",
+        bKash: "01347319829",
         Nagad: ""
     };
 
