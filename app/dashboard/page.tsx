@@ -5,7 +5,7 @@ import Link from 'next/link'
 import {
   Home, Menu, X, LogOut, User, Search, Bell,
   Wallet, Settings, Clock, Send, LogIn, UserPlus, ShieldCheck,
-  ChevronRight, Star, Zap, TrendingUp, Award
+  ChevronRight, Star, Zap, TrendingUp, Award, Layers
 } from 'lucide-react'
 import { getProfile, placeOrderAction, logoutAction } from '@/lib/actions'
 import { services, categories } from '@/lib/services'
@@ -13,7 +13,6 @@ import { services, categories } from '@/lib/services'
 export default function DashboardPage() {
   const router = useRouter()
   const [profile, setProfile] = useState<any>(null)
-  const [sidebarOpen, setSidebarOpen] = useState(false)
   const [activeCategory, setActiveCategory] = useState('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [activeService, setActiveService] = useState<string | null>(null)
@@ -65,200 +64,225 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #022c22 0%, #064e3b 50%, #065f46 100%)' }}>
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f4fbf7' }}>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ width: 56, height: 56, margin: '0 auto 16px', border: '4px solid rgba(16,185,129,0.3)', borderTopColor: '#10b981', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
-          <p style={{ color: '#10b981', fontWeight: 700, fontSize: 15 }}>লোড হচ্ছে...</p>
+          <div style={{ width: 56, height: 56, margin: '0 auto 16px', border: '4px solid rgba(16,185,129,0.3)', borderTopColor: '#006a4e', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
+          <p style={{ color: '#006a4e', fontWeight: 700, fontSize: 15 }}>লোড হচ্ছে...</p>
         </div>
       </div>
     )
   }
 
-  const navItems = [
-    { href: '/dashboard', icon: Home, label: 'ড্যাশবোর্ড' },
-    { href: '/dashboard/profile', icon: User, label: 'প্রোফাইল' },
-    { href: '/dashboard/orders', icon: Clock, label: 'অর্ডার লিস্ট' },
-    { href: '/dashboard/balance', icon: Wallet, label: 'ব্যালেন্স যোগ করুন' },
-    { href: '/dashboard/settings', icon: Settings, label: 'সেটিংস' },
-  ]
-
-  const statCards = [
-    { label: 'মোট সেবা', value: '৭২+', icon: '🏛️', color: 'rgba(16,185,129,0.12)', accent: '#059669', href: '/dashboard' },
-    { label: 'চলমান অর্ডার', value: '০', icon: '⚡', color: 'rgba(245,158,11,0.12)', accent: '#d97706', href: '/dashboard/orders' },
-    { label: 'সফল অর্ডার', value: '০', icon: '✅', color: 'rgba(6,79,59,0.12)', accent: '#064e3b', href: '/dashboard/orders' },
-  ]
-
   return (
     <>
       <style>{`
-        * { box-sizing: border-box; }
-        html, body { width:100%; margin:0; padding:0; }
+        /* ব্রাউজারের সব ডিফল্ট ও কাস্টম টপ বর্ডার/লাইন লেআউট রিসেট */
+        html, body { 
+          width: 100%; 
+          min-height: 100vh; 
+          background: #f4fbf7 !important; 
+          color: #1f2937; 
+          margin: 0 !important; 
+          padding: 0 !important; 
+          border: none !important;
+          outline: none !important;
+        }
+        * { box-sizing: border-box; font-family: inherit; margin: 0; padding: 0; }
+        
         @keyframes spin { to { transform: rotate(360deg); } }
-        @keyframes fadeInUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
-        .dash-sidebar { background: linear-gradient(170deg, #022c22 0%, #064e3b 45%, #065f46 100%); width:260px; flex-shrink:0; }
-        .dash-root { display:flex; width:100%; min-height:100vh; background:#f6fdf9; overflow:hidden; }
-        .dash-sidebar-wrapper { display:none; position:sticky; top:0; height:100vh; overflow-y:auto; }
-        .dash-sidebar-wrapper.mobile-open { display:flex !important; position:fixed !important; left:0; top:0; height:100vh; z-index:50; }
-        @media (min-width:1024px) { .dash-sidebar-wrapper { display:flex; flex-direction:column; } }
-        .dash-main { flex:1; min-width:0; display:flex; flex-direction:column; overflow-x:hidden; }
-        .dash-main-toggle { display:flex; }
-        @media (min-width:1024px) { .dash-main-toggle { display:none !important; } }
-        .dash-nav-link { display:flex; align-items:center; gap:12px; padding:11px 16px; border-radius:12px; color:rgba(255,255,255,0.7); font-size:14px; font-weight:500; transition:all 0.25s; text-decoration:none; position:relative; }
-        .dash-nav-link:hover { background:rgba(16,185,129,0.15); color:#10b981; }
-        .dash-nav-link.active { background:rgba(16,185,129,0.2); color:#10b981; }
-        .service-card-db { background:#fff; border:1.5px solid rgba(6,79,59,0.09); border-radius:14px; padding:12px 6px 10px; display:flex; flex-direction:column; align-items:center; text-align:center; cursor:pointer; width:100%; transition:all 0.3s cubic-bezier(0.4,0,0.2,1); }
-        .service-card-db:hover { transform:translateY(-5px); border-color:rgba(5,150,105,0.35); box-shadow:0 12px 35px rgba(6,79,59,0.14); }
-        .service-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; width:100%; }
-        @media (min-width:640px)  { .service-grid { grid-template-columns:repeat(4,1fr); gap:12px; } }
-        @media (min-width:1024px) { .service-grid { grid-template-columns:repeat(5,1fr); } }
-        @media (min-width:1280px) { .service-grid { grid-template-columns:repeat(6,1fr); } }
-        .stats-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:22px; }
-        @media (min-width:640px) { .stats-grid { grid-template-columns:repeat(3,1fr); gap:12px; } }
-        .stat-mini { border-radius:14px; padding:12px; border:1px solid rgba(6,79,59,0.08); background:#fff; transition:all 0.25s; }
-        .db-search { width:100%; padding:10px 14px 10px 38px; border-radius:12px; border:1.5px solid rgba(6,79,59,0.14); background:rgba(240,253,244,0.7); font-size:13px; color:#064e3b; outline:none; transition:all 0.2s; }
-        .modal-overlay { position:fixed; inset:0; z-index:60; display:flex; align-items:center; justify-content:center; padding:16px; background:rgba(2,44,34,0.55); backdrop-filter:blur(8px); }
-        .modal-box { background:#fff; border-radius:24px; width:100%; max-width:420px; padding:28px; box-shadow:0 30px 80px rgba(2,44,34,0.25); animation:fadeInUp 0.35s ease; }
-        .balance-card { background:linear-gradient(135deg, #064e3b 0%, #065f46 50%, #059669 100%); border-radius:20px; padding:20px; position:relative; overflow:hidden; }
+        @keyframes fadeInUp { from { opacity:0; transform:translateY(15px); } to { opacity:1; transform:translateY(0); } }
+        
+        .dash-container { max-width: 1240px; margin: 0 auto; padding: 0 20px; }
+        .top-navbar { background: #fff; border-radius: 16px; border: 1px solid #e1eedf; padding: 12px 24px; margin-top: 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 20px rgba(0, 106, 78, 0.03); }
+        .nav-links { display: flex; gap: 6px; background: #e8f4ee; padding: 4px; border-radius: 10px; align-items: center; }
+        .nav-btn { display: flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 600; color: #374151; border: none; background: transparent; cursor: pointer; text-decoration: none; transition: all 0.2s; }
+        .nav-btn.active { background: #fff; color: #006a4e; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .nav-btn.admin { border: 1px dashed rgba(217,119,6,0.5); background: rgba(217,119,6,0.06); color: #b45309; }
+        .nav-btn.admin:hover { background: rgba(217,119,6,0.12); }
+        
+        .user-badge { display: flex; align-items: center; gap: 10px; background: #e8f4ee; padding: 6px 14px; border-radius: 12px; }
+        
+        .hero-section { display: grid; grid-template-columns: 1.8fr 1fr; gap: 20px; margin-top: 24px; }
+        @media (max-width: 900px) { .hero-section { grid-template-columns: 1fr; } }
+        .welcome-card { background: #005a3e; border-radius: 20px; padding: 32px; color: #fff; display: flex; flex-direction: column; justify-content: center; position: relative; }
+        .balance-box { background: #fff; border-radius: 20px; border: 1px solid #e1eedf; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 20px rgba(0, 106, 78, 0.03); }
+        .logout-btn { width: 100%; text-align: center; border: 1px solid #ffd6d6; background: #fff5f5; color: #dc2626; padding: 10px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .logout-btn:hover { background: #fee2e2; }
+
+        .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 24px; }
+        @media (max-width: 640px) { .stats-row { grid-template-columns: 1fr; gap: 12px; } }
+        .stat-card { background: #fff; border-radius: 16px; border: 1px solid #e1eedf; padding: 20px 24px; display: flex; align-items: center; gap: 16px; box-shadow: 0 4px 20px rgba(0, 106, 78, 0.02); }
+        
+        .filter-search-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 32px; margin-bottom: 24px; flex-wrap: wrap; }
+        .categories-holder { display: flex; flex-wrap: wrap; gap: 8px; flex: 1; }
+        .cat-toggle-btn { display: flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; transition: all 0.2s; border: 1px solid #cce3d3; background: #fff; color: #374151; }
+        .search-wrapper { position: relative; width: 100%; max-width: 280px; }
+        @media (max-width: 640px) { .search-wrapper { max-width: 100%; } }
+        .search-input { width: 100%; padding: 10px 14px 10px 38px; border-radius: 12px; border: 1px solid #cce3d3; background: #fff; font-size: 13px; outline: none; transition: all 0.2s; }
+        .search-input:focus { border-color: #006a4e; background: #fff; }
+
+        .service-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; padding-bottom: 40px; }
+        @media (max-width: 1200px) { .service-grid { grid-template-columns: repeat(4, 1fr); } }
+        @media (max-width: 900px) { .service-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 600px) { .service-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
+        
+        .service-card-db { background: #fff; border: 1px solid #e2f0e7; border-bottom: 3px solid #e2f0e7; border-radius: 20px; padding: 24px 16px; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer; width: 100%; transition: all 0.25s ease-out; box-shadow: 0 4px 12px rgba(0, 106, 78, 0.02); position: relative; }
+        .service-card-db:hover { transform: translateY(-5px); border-color: #006a4e; border-bottom-color: #006a4e; box-shadow: 0 12px 24px rgba(0, 106, 78, 0.08); }
+        
+        .card-icon-holder { background: #f4fbf7; color: #006a4e; transition: all 0.25s ease-out; }
+        .service-card-db:hover .card-icon-holder { background: #006a4e; color: #fff; transform: scale(1.05); }
+        
+        .price-tag { display: inline-flex; align-items: center; background: #e6f7f0; color: #006a4e; border-radius: 8px; padding: 4px 14px; font-size: 12px; font-weight: 800; margin-top: auto; transition: all 0.25s ease-out; }
+        .service-card-db:hover .price-tag { background: #006a4e; color: #fff; }
+
+        .modal-overlay { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(0, 43, 31, 0.4); backdrop-filter: blur(6px); }
+        .modal-box { background: #fff; border-radius: 24px; width: 100%; max-width: 420px; padding: 28px; box-shadow: 0 30px 70px rgba(0,43,31,0.15); animation: fadeInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); border: 1px solid #e1eedf; }
       `}</style>
 
-      <div className="dash-root">
-        {sidebarOpen && (
-          <div
-            style={{ position: 'fixed', inset: 0, zIndex: 40, background: 'rgba(2,44,34,0.5)', backdropFilter: 'blur(4px)' }}
-            onClick={() => setSidebarOpen(false)}
-          />
-        )}
-
-        <aside className={`dash-sidebar dash-sidebar-wrapper ${sidebarOpen ? 'mobile-open' : ''}`} style={{ zIndex: 50 }}>
-          <div style={{ padding: '20px 20px 16px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
-                <div style={{ width: 38, height: 38, borderRadius: 12, background: 'linear-gradient(135deg,#10b981,#d97706)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18 }}>🇧🇩</div>
-                <div>
-                  <p style={{ color: '#fff', fontWeight: 800, fontSize: 14, lineHeight: 1.2 }}>সহজ ডিজিটাল সেবা</p>
-                  <p style={{ color: 'rgba(16,185,129,0.8)', fontSize: 10, fontWeight: 600, letterSpacing: '0.06em' }}>SHOHOJ DIGITAL SHEBA</p>
-                </div>
-              </Link>
+      {/* এই ফাইলে টপ লাইনের সমস্ত ডিভ ও মার্কআপ সম্পূর্ণ রিমুভড */}
+      <div className="dash-container">
+        {/* টপ হেডার বার */}
+        <header className="top-navbar">
+          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
+            <div style={{ width: 36, height: 36, borderRadius: 10, background: '#006a4e', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 16, fontWeight: 'bold' }}>স</div>
+            <div>
+              <p style={{ color: '#006a4e', fontWeight: 800, fontSize: 15, margin: 0, lineHeight: 1.2 }}>সহজ ডিজিটাল সেবা</p>
+              <p style={{ color: '#6b7280', fontSize: 9, fontWeight: 600, margin: 0, letterSpacing: '0.04em' }}>SHOHOJ DIGITAL SHEBA</p>
             </div>
-          </div>
+          </Link>
 
-          <div style={{ padding: '14px 14px 10px' }}>
-            <div className="balance-card">
-              <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 10, fontWeight: 600, letterSpacing: '0.07em', textTransform: 'uppercase', marginBottom: 4 }}>বর্তমান ব্যালেন্স</p>
-              <p style={{ color: '#fff', fontSize: 30, fontWeight: 900, marginBottom: 12 }}>
-                {profile?.balance || 0} <span style={{ fontSize: 16, fontWeight: 600, opacity: 0.8 }}>৳</span>
-              </p>
-              <Link
-                href="/dashboard/balance"
-                style={{ display: 'block', textAlign: 'center', background: 'linear-gradient(135deg,#d97706,#f59e0b)', color: '#022c22', padding: '9px', borderRadius: 10, fontSize: 12, fontWeight: 800, textDecoration: 'none', boxShadow: '0 4px 14px rgba(217,119,6,0.4)' }}
-              >
-                💳 রিচার্জ করুন
-              </Link>
-            </div>
-          </div>
-
-          <nav style={{ flex: 1, padding: '6px 10px', overflowY: 'auto' }}>
-            {navItems.map(item => (
-              <Link key={item.label} href={item.href} className="dash-nav-link" style={{ marginBottom: 2 }}>
-                <div style={{ width: 30, height: 30, borderRadius: 9, background: 'rgba(255,255,255,0.07)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <item.icon size={15} />
-                </div>
-                {item.label}
-              </Link>
-            ))}
+          <div className="nav-links">
+            <Link href="/dashboard" className="nav-btn active"><Home size={14} /> কনসোল হোম</Link>
+            <Link href="/dashboard/profile" className="nav-btn"><User size={14} /> প্রোফাইল</Link>
+            <Link href="/dashboard/orders" className="nav-btn"><Clock size={14} /> অর্ডার ট্র্যাকিং</Link>
+            <Link href="/dashboard/settings" className="nav-btn"><Settings size={14} /> সেটিংস</Link>
+            
             {profile?.role === 'admin' && (
-              <Link href="/admin" className="dash-nav-link" style={{ border: '1px solid rgba(217,119,6,0.3)', background: 'rgba(217,119,6,0.08)', color: '#fbbf24' }}>
-                <ShieldCheck size={15} /> এডমিন প্যানেল
+              <Link href="/admin" className="nav-btn admin">
+                <ShieldCheck size={14} /> এডমিন প্যানেল
               </Link>
             )}
-          </nav>
+          </div>
 
-          <div style={{ padding: '12px 10px 20px', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-            <button onClick={handleLogout} style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 10, padding: '11px 16px', borderRadius: 12, background: 'rgba(220,38,38,0.1)', border: '1px solid rgba(220,38,38,0.18)', color: '#fca5a5', cursor: 'pointer', fontSize: 14, fontWeight: 600 }}>
-              <LogOut size={15} /> লগআউট
+          <div className="user-badge">
+            <div style={{ width: 28, height: 28, borderRadius: '50%', background: '#006a4e', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700, fontSize: 12 }}>
+              {profile?.fullName?.charAt(0)?.toUpperCase() || 'A'}
+            </div>
+            <div style={{ textAlign: 'left' }}>
+              <p style={{ fontSize: 12, fontWeight: 700, color: '#1f2937', margin: 0 }}>{profile?.fullName || 'Asiful Islam'}</p>
+              <p style={{ fontSize: 10, color: '#006a4e', fontWeight: 600, margin: 0 }}>ব্যালেন্স: ৳ {profile?.balance || 0}</p>
+            </div>
+          </div>
+        </header>
+
+        {/* স্বাগতম ব্যানার এবং ওয়ালেট ব্যালেন্স */}
+        <section className="hero-section">
+          <div className="welcome-card">
+            <h2 style={{ fontSize: 24, fontWeight: 800, margin: '0 0 10px 0', display: 'flex', alignItems: 'center', gap: 8 }}>
+              স্বাগতম, {profile?.fullName?.split(' ')[0] || 'Asiful'}! 👋
+            </h2>
+            <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: 13, margin: 0, lineHeight: 1.5, fontWeight: 500 }}>
+              আপনার প্রয়োজনীয় সরকারি ই-সেবা, ভেরিফিকেশন বা online কপি ডাউনলোড করতে নিচের মডিউলগুলো ব্যবহার করুন।
+            </p>
+          </div>
+
+          <div className="balance-box">
+            <div>
+              <p style={{ color: '#4b5563', fontSize: 12, fontWeight: 700, margin: '0 0 4px 0' }}>বর্তমান ওয়ালেট ব্যালেন্স</p>
+              <p style={{ color: '#006a4e', fontSize: 32, fontWeight: 900, margin: 0 }}>
+                ৳ {profile?.balance || 0}
+              </p>
+            </div>
+            <button onClick={handleLogout} className="logout-btn" style={{ marginTop: 16 }}>
+              লগআউট সেশন
             </button>
           </div>
-        </aside>
+        </section>
 
-        <div className="dash-main">
-          <header style={{ background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(6,79,59,0.1)', position: 'sticky', top: 0, zIndex: 30, height: 62, display: 'flex', alignItems: 'center', padding: '0 20px', gap: 12 }}>
-            <button onClick={() => setSidebarOpen(true)} className="dash-main-toggle" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px', color: '#064e3b' }}>
-              <Menu size={22} />
+        {/* কাউন্টার স্ট্যাটস কার্ড */}
+        <section className="stats-row">
+          <div className="stat-card">
+            <div style={{ fontSize: 24, background: '#f0f4f8', width: 42, height: 42, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>🏛️</div>
+            <div>
+              <p style={{ fontSize: 20, fontWeight: 900, color: '#006a4e', margin: 0 }}>৭২টি</p>
+              <p style={{ fontSize: 11, color: '#6b7280', fontWeight: 600, margin: 0 }}>মোট ডিজিটাল সেবা</p>
+            </div>
+          </div>
+          <div className="stat-card">
+            <div style={{ fontSize: 24, background: '#fff9db', width: 42, height: 42, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>⏳</div>
+            <div>
+              <p style={{ fontSize: 20, fontWeight: 900, color: '#d97706', margin: 0 }}>০টি</p>
+              <p style={{ fontSize: 11, color: '#6b7280', fontWeight: 600, margin: 0 }}>চলমান অর্ডার</p>
+            </div>
+          </div>
+          <div className="stat-card">
+            <div style={{ fontSize: 24, background: '#e6fcf5', width: 42, height: 42, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>✅</div>
+            <div>
+              <p style={{ fontSize: 20, fontWeight: 900, color: '#099268', margin: 0 }}>০টি</p>
+              <p style={{ fontSize: 11, color: '#6b7280', fontWeight: 600, margin: 0 }}>সফল ডেলিভারি</p>
+            </div>
+          </div>
+        </section>
+
+        {/* ফিল্টার এবং সার্চ বার */}
+        <section className="filter-search-bar">
+          <div className="categories-holder">
+            <button 
+              onClick={() => setActiveCategory('all')}
+              className="cat-toggle-btn"
+              style={activeCategory === 'all' 
+                ? { background: '#006a4e', color: '#fff', borderColor: '#006a4e' } 
+                : {}
+              }
+            >
+              🟢 অল মডিউলস
             </button>
+            {categories.map(cat => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className="cat-toggle-btn"
+                style={activeCategory === cat.id
+                  ? { background: '#006a4e', color: '#fff', borderColor: '#006a4e' }
+                  : {}
+                }
+              >
+                <span style={{ marginRight: '4px' }}>{cat.icon}</span> {cat.label}
+              </button>
+            ))}
+          </div>
 
-            <div style={{ flex: 1, maxWidth: 380, position: 'relative' }}>
-              <Search size={14} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: '#6b7280' }} />
-              <input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="সেবা খুঁজুন..." className="db-search" />
-            </div>
+          <div className="search-wrapper">
+            <Search size={14} style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: '#9ca3af' }} />
+            <input 
+              type="text" 
+              value={searchQuery} 
+              onChange={e => setSearchQuery(e.target.value)} 
+              placeholder="সার্ভিস বা মডিউল সার্চ করুন..." 
+              className="search-input"
+            />
+          </div>
+        </section>
 
-            <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 12 }}>
-              <div style={{ textAlign: 'right', display: profile?.fullName ? 'block' : 'none' }}>
-                <p style={{ fontSize: 'clamp(11px, 3vw, 13px)', fontWeight: 700, color: '#022c22', lineHeight: 1.2 }}>{profile?.fullName}</p>
-                <p style={{ fontSize: 'clamp(9px, 2.5vw, 11px)', color: '#059669', fontWeight: 600 }}>ব্যালেন্স: {profile?.balance || 0}৳</p>
+        {/* সার্ভিস গ্রিড */}
+        <section className="service-grid">
+          {filteredServices.map((service: any) => (
+            <button key={service.id} onClick={() => setActiveService(service.id)} className="service-card-db">
+              <div className="card-icon-holder" style={{ width: 44, height: 44, borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, marginBottom: 12 }}>
+                {service.icon || '📄'}
               </div>
-              <div style={{ width: 38, height: 38, borderRadius: 12, background: 'linear-gradient(135deg,#064e3b,#10b981)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 900, flexShrink: 0 }}>
-                {profile?.fullName?.charAt(0)?.toUpperCase()}
+              <p style={{ fontSize: 13, fontWeight: 700, color: '#1f2937', margin: '0 0 14px 0', lineHeight: 1.4 }}>
+                {service.title}
+              </p>
+              <div className="price-tag">
+                ৳ {service.price}
               </div>
-            </div>
-          </header>
-
-          <main style={{ flex: 1, padding: '24px 24px 40px', overflowY: 'auto', width: '100%', minWidth: 0 }}>
-            <div style={{ background: 'linear-gradient(135deg, #022c22 0%, #064e3b 40%, #065f46 70%, #047857 100%)', borderRadius: 24, padding: 'clamp(20px, 5vw, 28px)', marginBottom: 24, position: 'relative', overflow: 'hidden' }}>
-              <div style={{ position: 'relative', zIndex: 1 }}>
-                <h2 style={{ fontSize: 'clamp(20px, 6vw, 26px)', fontWeight: 900, color: '#fff', marginBottom: 6 }}>আস্সালামু আলাইকুম, {profile?.fullName?.split(' ')[0]}! 👋</h2>
-                <p style={{ color: 'rgba(16,185,129,0.8)', fontSize: 'clamp(12px, 3.5vw, 14px)', marginBottom: 20 }}>আজকে আপনি কোন সরকারি সেবাটি নিতে চান?</p>
-                <Link href="/dashboard/balance" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'linear-gradient(135deg,#d97706,#f59e0b)', color: '#022c22', padding: '10px 20px', borderRadius: 14, fontSize: 'clamp(11px, 3vw, 13px)', fontWeight: 800, textDecoration: 'none' }}>
-                  <Wallet size={15} /> ব্যালেন্স যোগ করুন
-                </Link>
-              </div>
-            </div>
-
-            <div className="stats-grid">
-              {statCards.map((s, i) => (
-                <Link key={i} href={s.href} className="stat-mini" style={{ textDecoration: 'none', display: 'block', cursor: 'pointer' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexDirection: 'column', textAlign: 'center' }}>
-                    <div style={{ width: 36, height: 36, borderRadius: 10, background: s.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16 }}>{s.icon}</div>
-                    <div>
-                      <p style={{ fontSize: 16, fontWeight: 900, color: '#022c22' }}>{s.value}</p>
-                      <p style={{ fontSize: 10, color: '#6b7280', whiteSpace: 'nowrap' }}>{s.label}</p>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '20px', width: '100%' }}>
-              {categories.map(cat => (
-                <button
-                  key={cat.id}
-                  onClick={() => setActiveCategory(cat.id)}
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 14px',
-                    borderRadius: '99px', fontSize: '12px', fontWeight: 'bold', whiteSpace: 'nowrap',
-                    transition: 'all 0.2s', cursor: 'pointer',
-                    ...(activeCategory === cat.id
-                      ? { background: 'linear-gradient(135deg, #064e3b, #059669)', color: '#fff', boxShadow: '0 4px 12px rgba(5,150,105,0.3)', border: 'none' }
-                      : { background: '#fff', color: '#374151', border: '1px solid rgba(6,79,59,0.15)' })
-                  }}
-                >
-                  <span style={{ fontSize: '14px' }}>{cat.icon}</span> {cat.label}
-                </button>
-              ))}
-            </div>
-
-            <div className="service-grid">
-              {filteredServices.map((service: any) => (
-                <button key={service.id} onClick={() => setActiveService(service.id)} className="service-card-db">
-                  <div className={service.color} style={{ width: 42, height: 42, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, marginBottom: 8 }}>{service.icon}</div>
-                  <p style={{ fontSize: 10, fontWeight: 700, color: '#1f2937', marginBottom: 8, lineHeight: 1.3 }}>{service.title}</p>
-                  <div style={{ display: 'inline-flex', alignItems: 'center', background: '#ecfdf5', color: '#065f46', borderRadius: 99, padding: '2px 8px', fontSize: 10, fontWeight: 800 }}>৳ {service.price}</div>
-                </button>
-              ))}
-            </div>
-          </main>
-        </div>
+            </button>
+          ))}
+        </section>
       </div>
 
+      {/* মোডাল উইন্ডো */}
       {activeService && (
         <div className="modal-overlay" onClick={() => setActiveService(null)}>
           <div className="modal-box" onClick={e => e.stopPropagation()}>
@@ -267,19 +291,27 @@ export default function DashboardPage() {
               if (!s) return null
               return (
                 <>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                      <div className={s.color} style={{ width: 52, height: 52, borderRadius: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 26 }}>{s.icon}</div>
-                      <div>
-                        <h3 style={{ fontSize: 16, fontWeight: 800, color: '#022c22' }}>{s.title}</h3>
-                        <p style={{ fontSize: 12, fontWeight: 800, color: '#059669' }}>চার্জ: {s.price} ৳</p>
+                      <div style={{ background: '#e6f7f0', width: 48, height: 48, borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22 }}>
+                        {s.icon || '📄'}
+                      </div>
+                      <div style={{ textAlign: 'left' }}>
+                        <h3 style={{ fontSize: 15, fontWeight: 800, color: '#1f2937', margin: 0 }}>{s.title}</h3>
+                        <p style={{ fontSize: 12, fontWeight: 700, color: '#006a4e', margin: '2px 0 0 0' }}>চার্জ: {s.price} ৳</p>
                       </div>
                     </div>
                   </div>
-                  <input type="text" value={orderInput} onChange={e => setOrderInput(e.target.value)} placeholder={s.inputPlaceholder || 'এখানে লিখুন...'} style={{ width: '100%', padding: '13px', borderRadius: 13, border: '1.5px solid #ddd', marginBottom: 18 }} />
+                  <input 
+                    type="text" 
+                    value={orderInput} 
+                    onChange={e => setOrderInput(e.target.value)} 
+                    placeholder={s.inputPlaceholder || 'এখানে প্রয়োজনীয় তথ্য দিন...'} 
+                    style={{ width: '100%', padding: '12px 14px', borderRadius: 12, border: '1.5px solid #cce3d3', marginBottom: 20, fontSize: 13, outline: 'none' }} 
+                  />
                   <div style={{ display: 'flex', gap: 10 }}>
-                    <button onClick={() => setActiveService(null)} style={{ flex: 1, padding: '13px', borderRadius: 13, background: '#f3f4f6' }}>বাতিল</button>
-                    <button onClick={() => handlePlaceOrder(s)} disabled={submitting} style={{ flex: 1, padding: '13px', borderRadius: 13, background: '#059669', color: '#fff', fontWeight: 800 }}>
+                    <button onClick={() => setActiveService(null)} style={{ flex: 1, padding: '12px', borderRadius: 12, background: '#f3f4f6', border: 'none', color: '#4b5563', fontWeight: 700, cursor: 'pointer' }}>বাতিল</button>
+                    <button onClick={() => handlePlaceOrder(s)} disabled={submitting} style={{ flex: 1, padding: '12px', borderRadius: 12, background: '#006a4e', color: '#fff', border: 'none', fontWeight: 700, cursor: 'pointer' }}>
                       {submitting ? 'লোড হচ্ছে...' : 'অর্ডার করুন'}
                     </button>
                   </div>

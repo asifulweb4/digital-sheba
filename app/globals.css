@@ -4,16 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ══════════════════════════════════════════════════
-   UNIQUE DESIGN SYSTEM — Bangladesh Premium Edition
-   Primary:  Forest Green  #064e3b / #065f46
-   Accent:   Emerald       #059669 / #10b981
-   CTA:      Crimson-Gold  #dc2626 → #f59e0b
-   Gold:     #d97706 / #fbbf24
-   BG:       Warm ivory    #fafdf7
-   ══════════════════════════════════════════════════ */
 :root {
-  /* Core */
   --green-deep:    #022c22;
   --green-primary: #064e3b;
   --green-mid:     #065f46;
@@ -21,32 +12,22 @@
   --green-light:   #10b981;
   --green-pale:    #d1fae5;
   --green-xpale:   #ecfdf5;
-
-  /* Gold */
   --gold-deep:     #92400e;
   --gold-mid:      #d97706;
   --gold-bright:   #f59e0b;
   --gold-light:    #fbbf24;
   --gold-pale:     #fef3c7;
-
-  /* Crimson */
   --red-mid:       #991b1b;
   --red-bright:    #dc2626;
   --red-light:     #ef4444;
-
-  /* Neutrals */
   --bg-base:       #f6fdf9;
   --bg-card:       #ffffff;
   --bg-section:    #f0fdf4;
   --text-primary:  #022c22;
   --text-secondary:#374151;
   --text-muted:    #6b7280;
-
-  /* Borders */
   --border:        rgba(6,79,59,0.12);
   --border-strong: rgba(6,79,59,0.28);
-
-  /* Shadows */
   --shadow-sm:    0 1px 4px rgba(6,79,59,0.08);
   --shadow-md:    0 4px 20px rgba(6,79,59,0.12);
   --shadow-lg:    0 12px 40px rgba(6,79,59,0.18);
@@ -54,7 +35,7 @@
   --shadow-green: 0 8px 32px rgba(5,150,105,0.30);
 }
 
-/* ── Reset ────────────────────────────────────────── */
+/* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 html, body {
@@ -65,7 +46,7 @@ html, body {
   line-height: 1.65;
 }
 
-/* ── Scrollbar ─────────────────────────────────── */
+/* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #d1fae5; }
 ::-webkit-scrollbar-thumb {
@@ -73,12 +54,10 @@ html, body {
   border-radius: 99px;
 }
 
-/* ── Selection ─────────────────────────────────── */
+/* ── Selection ── */
 ::selection { background: #d1fae5; color: #064e3b; }
 
-/* ══ HERO GRADIENT ═════════════════════════════════
-   Dark forest → mid-green → emerald → golden teal
-   ══════════════════════════════════════════════════ */
+/* ── Hero Gradient ── */
 .hero-gradient {
   background: linear-gradient(
     135deg,
@@ -90,7 +69,7 @@ html, body {
   );
 }
 
-/* ── Glass ──────────────────────────────────────── */
+/* ── Glass ── */
 .glass {
   background: rgba(255,255,255,0.80);
   backdrop-filter: blur(18px) saturate(200%);
@@ -104,7 +83,7 @@ html, body {
   border: 1px solid rgba(255,255,255,0.09);
 }
 
-/* ── Buttons ────────────────────────────────────── */
+/* ── Buttons ── */
 .btn-primary {
   background: linear-gradient(135deg, #065f46, #059669);
   color: #fff;
@@ -150,7 +129,7 @@ html, body {
   box-shadow: 0 12px 36px rgba(217,119,6,0.45);
 }
 
-/* ── Cards ──────────────────────────────────────── */
+/* ── Cards ── */
 .service-card {
   transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
   border: 1px solid var(--border);
@@ -161,17 +140,11 @@ html, body {
   border-color: var(--border-strong);
 }
 
-/* ── Stat-card top accent ───────────────────────── */
-.stat-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #064e3b, #10b981, #d97706);
-  border-radius: 3px 3px 0 0;
-}
+/* ── stat-card — top accent line সরানো হয়েছে ── */
+/* .stat-card::before ব্লকটা intentionally remove করা হয়েছে
+   কারণ এটা dashboard এ unwanted orange/gradient line দেখাচ্ছিল */
 
-/* ── Section title underline ────────────────────── */
+/* ── Section title underline ── */
 .section-title { position: relative; display: inline-block; }
 .section-title::after {
   content: '';
@@ -182,7 +155,7 @@ html, body {
   border-radius: 99px;
 }
 
-/* ── Spinner ───────────────────────────────────── */
+/* ── Spinner ── */
 .spinner {
   border: 3px solid rgba(5,150,105,0.18);
   border-top-color: #059669;
@@ -191,14 +164,14 @@ html, body {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ── Inputs ─────────────────────────────────────── */
+/* ── Inputs ── */
 input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: #059669 !important;
   box-shadow: 0 0 0 3px rgba(5,150,105,0.18);
 }
 
-/* ── Animations ─────────────────────────────────── */
+/* ── Animations ── */
 @keyframes slideDown {
   from { opacity: 0; transform: translateY(-14px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -217,7 +190,7 @@ input:focus, textarea:focus, select:focus {
 }
 .animate-fade-up { animation: fadeInUp 0.6s ease-out both; }
 
-/* ── Unique glow text ───────────────────────────── */
+/* ── Glow text ── */
 .glow-green {
   text-shadow: 0 0 40px rgba(16,185,129,0.45), 0 0 80px rgba(16,185,129,0.20);
 }
@@ -225,13 +198,13 @@ input:focus, textarea:focus, select:focus {
   text-shadow: 0 0 40px rgba(245,158,11,0.50), 0 0 80px rgba(245,158,11,0.25);
 }
 
-/* ── Grid dots ──────────────────────────────────── */
+/* ── Grid dots ── */
 .grid-dots {
   background-image: radial-gradient(rgba(16,185,129,0.15) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
-/* ── Gold shimmer badge ─────────────────────────── */
+/* ── Gold shimmer badge ── */
 @keyframes goldShimmer {
   0%   { background-position: -200% center; }
   100% { background-position:  200% center; }
@@ -246,7 +219,7 @@ input:focus, textarea:focus, select:focus {
   animation: goldShimmer 3s linear infinite;
 }
 
-/* ── Noise texture ──────────────────────────────── */
+/* ── Noise texture ── */
 .hero-noise::after {
   content: '';
   position: absolute;
@@ -256,7 +229,7 @@ input:focus, textarea:focus, select:focus {
   opacity: 0.5;
 }
 
-/* ── Unique diagonal stripe accent ─────────────── */
+/* ── Diagonal stripe accent ── */
 .stripe-accent {
   background-image: repeating-linear-gradient(
     45deg,
@@ -267,7 +240,7 @@ input:focus, textarea:focus, select:focus {
   );
 }
 
-/* ── Tag pills ──────────────────────────────────── */
+/* ── Tag pills ── */
 .tag-green {
   background: var(--green-xpale);
   color: var(--green-mid);
@@ -293,7 +266,7 @@ input:focus, textarea:focus, select:focus {
   text-transform: uppercase;
 }
 
-/* ── Price tag ──────────────────────────────────── */
+/* ── Price tag ── */
 .price-tag {
   background: linear-gradient(135deg, var(--green-xpale), #d1fae5);
   color: var(--green-mid);
