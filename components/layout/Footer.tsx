@@ -1,3 +1,4 @@
+'use client'
 import { Fragment } from 'react'
 import Link from 'next/link'
 import { Phone, Mail, MapPin, MessageSquare, Video, MessageCircle, ArrowRight, Shield, Clock, Star } from 'lucide-react'
