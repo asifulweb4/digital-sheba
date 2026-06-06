@@ -193,9 +193,16 @@ export default function DashboardPage() {
                 ৳ {profile?.balance || 0}
               </p>
             </div>
-            <button onClick={handleLogout} className="logout-btn" style={{ marginTop: 16 }}>
-              লগআউট সেশন
-            </button>
+            <Link href="/dashboard/balance" style={{ flex: 1, textAlign: 'center', background: '#006a4e', color: '#fff', padding: '10px', borderRadius: 12, fontSize: 13, fontWeight: 700, textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                <Wallet size={14} /> রিচার্জ করুন
+              </Link>
+            <div style={{ display: 'flex', gap: 10, marginTop: 16 }}>
+              <button onClick={handleLogout} className="logout-btn" style={{ flex: 1, marginTop: 0 }}>
+                লগআউট সেশন
+              </button>
+            </div>
+              
+            
           </div>
         </section>
 

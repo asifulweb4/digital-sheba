@@ -78,9 +78,7 @@ export default function ProfilePage() {
                                         <span className="text-4xl font-black text-emerald-900">{profile?.balance}</span>
                                         <span className="text-emerald-600 font-bold text-lg">৳ (টাকা)</span>
                                     </div>
-                                    <button onClick={() => router.push('/dashboard/balance')} className="mt-4 w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-black text-sm shadow-lg shadow-emerald-200 transition-all">
-                                        ব্যালেন্স রিচার্জ করুন
-                                    </button>
+    
                                 </div>
 
                                 <div className="bg-amber-50/50 border border-amber-100 p-6 rounded-3xl">
