@@ -1,77 +1,138 @@
-'use client'
-import { useState } from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
-import Navbar from '@/components/layout/Navbar'
-import Footer from '@/components/layout/Footer'
-import { services as localServices, categories } from '@/lib/services'
-import { Search, ArrowRight, Users, UserCheck, CreditCard, Layers } from 'lucide-react'
+"use client";
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import { services as localServices, categories } from "@/lib/services";
+import {
+  Search,
+  ArrowRight,
+  Users,
+  UserCheck,
+  CreditCard,
+  Layers,
+} from "lucide-react";
 
 const stats = [
-  { icon: Layers, value: '৭২+', label: 'মোট সেবা সংখ্যা', color: '#10b981', bgColor: 'bg-emerald-50/80' },
-  { icon: Users, value: '৬,৩৯,১৪৮', label: 'মোট ব্যবহারকারী', color: '#f59e0b', bgColor: 'bg-amber-50/80' },
-  { icon: UserCheck, value: '৫,৭২৫', label: 'মোট লেনদেন', color: '#10b981', bgColor: 'bg-emerald-50/80' },
-  { icon: CreditCard, value: '৯৯২', label: 'মোট পেমেন্ট', color: '#6366f1', bgColor: 'bg-indigo-50/80' },
-]
+  {
+    icon: Layers,
+    value: "৭২+",
+    label: "মোট সেবা সংখ্যা",
+    color: "#10b981",
+    bgColor: "bg-emerald-50/80",
+  },
+  {
+    icon: Users,
+    value: "৬,৩৯,১৪৮",
+    label: "মোট ব্যবহারকারী",
+    color: "#f59e0b",
+    bgColor: "bg-amber-50/80",
+  },
+  {
+    icon: UserCheck,
+    value: "৫,৭২৫",
+    label: "মোট লেনদেন",
+    color: "#10b981",
+    bgColor: "bg-emerald-50/80",
+  },
+  {
+    icon: CreditCard,
+    value: "৯৯২",
+    label: "মোট পেমেন্ট",
+    color: "#6366f1",
+    bgColor: "bg-indigo-50/80",
+  },
+];
 
 export default function HomePage() {
-  const [activeCategory, setActiveCategory] = useState('all')
-  const [searchQuery, setSearchQuery] = useState('')
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const displayServices = localServices || []
+  const displayServices = localServices || [];
 
-  const filteredServices = displayServices.filter(s => {
-    const matchCat = activeCategory === 'all' || s.category === activeCategory
-    const matchSearch = s.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (s.titleEn && s.titleEn.toLowerCase().includes(searchQuery.toLowerCase()))
-    return matchCat && matchSearch
-  })
+  const filteredServices = displayServices.filter((s) => {
+    const matchCat = activeCategory === "all" || s.category === activeCategory;
+    const matchSearch =
+      s.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (s.titleEn &&
+        s.titleEn.toLowerCase().includes(searchQuery.toLowerCase()));
+    return matchCat && matchSearch;
+  });
 
-  const hasAllCategory = categories.some(cat => cat.id === 'all' || cat.label.includes('সকল সেবা'))
+  const hasAllCategory = categories.some(
+    (cat) => cat.id === "all" || cat.label.includes("সকল সেবা"),
+  );
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: '#f4f8f6', fontFamily: "'Hind Siliguri', sans-serif" }}>
+    <div
+      className="min-h-screen flex flex-col"
+      style={{
+        background: "#f4f8f6",
+        fontFamily: "'Hind Siliguri', sans-serif",
+      }}
+    >
       <Navbar />
 
       {/* ══════════ HERO + STATS = FULL SCREEN (শুধু mobile এ) ══════════ */}
       <div className="hero-fullscreen-wrapper">
-
         {/* ══════════════════════ HERO SECTION ═══════════════════════ */}
-        <section className="relative w-full bg-[#012217] overflow-hidden flex items-center justify-center px-4 sm:px-6 lg:px-8 hero-section-flex" style={{ paddingTop: '3rem', paddingBottom: '5rem' }}>
+        <section
+          className="relative w-full bg-[#012217] overflow-hidden flex items-center justify-center px-4 sm:px-6 lg:px-8 hero-section-flex"
+          style={{ paddingTop: "3rem", paddingBottom: "5rem" }}
+        >
           <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-emerald-500/10 rounded-full blur-[150px] pointer-events-none" />
           <div className="absolute bottom-0 left-1/4 w-[350px] h-[350px] bg-emerald-400/5 rounded-full blur-[130px] pointer-events-none" />
 
           <div className="max-w-5xl w-full mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 items-center relative z-10">
-            
             {/* বামপাশের টেক্সট এরিয়া */}
             <div className="md:col-span-7 text-center md:text-left text-white flex flex-col items-center md:items-start order-2 md:order-1">
               <span className="text-[#facc15] font-black text-xs sm:text-sm mb-3 tracking-widest uppercase bg-white/5 px-3 py-1 rounded-full border border-white/10">
                 বাংলাদেশের সবচেয়ে নির্ভরযোগ্য প্ল্যাটফর্ম
               </span>
-              
+
               <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-black mb-5 leading-[1.15] tracking-tight">
                 নির্ভরযোগ্য <br className="hidden md:block" />
-                <span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">ডিজিটাল সেবা</span>
+                <span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">
+                  ডিজিটাল সেবা
+                </span>
               </h1>
 
-              <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full font-black text-xs sm:text-sm mb-6 shadow-md"
-                style={{ background: '#facc15', color: '#012217' }}>
+              <div
+                className="inline-flex items-center gap-2 px-5 py-2 rounded-full font-black text-xs sm:text-sm mb-6 shadow-md"
+                style={{ background: "#facc15", color: "#012217" }}
+              >
                 <span>দ্রুত</span> • <span>সহজ</span> • <span>নিরাপদ</span>
               </div>
 
               <div className="space-y-3 mb-8 text-left w-full max-w-sm md:max-w-none mx-auto md:mx-0">
                 {[
-                  'সকল সেবা এক প্ল্যাটফর্মে',
-                  '২৪/৭ দ্রুত কাস্টমার সার্ভিস',
-                  '১০০% নিরাপদ লেনদেন নিশ্চিতকরণ'
+                  "সকল সেবা এক প্ল্যাটফর্মে",
+                  "২৪/৭ দ্রুত কাস্টমার সার্ভিস",
+                  "১০০% নিরাপদ লেনদেন নিশ্চিতকরণ",
                 ].map((text, idx) => (
-                  <div key={idx} className="flex items-center gap-3 bg-white/5 md:bg-transparent p-3 md:p-0 rounded-2xl md:rounded-none">
+                  <div
+                    key={idx}
+                    className="flex items-center gap-3 bg-white/5 md:bg-transparent p-3 md:p-0 rounded-2xl md:rounded-none"
+                  >
                     <div className="w-5 h-5 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-lg shrink-0">
-                      <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={4}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      <svg
+                        className="w-2.5 h-2.5 text-white"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={4}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
                       </svg>
                     </div>
-                    <span className="text-sm sm:text-base font-bold text-emerald-100/90">{text}</span>
+                    <span className="text-sm sm:text-base font-bold text-emerald-100/90">
+                      {text}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -80,20 +141,24 @@ export default function HomePage() {
                 href="/auth/register"
                 className="group inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-black text-sm sm:text-base transition-all duration-300 hover:brightness-105 active:scale-98 shadow-xl w-full sm:w-auto justify-center"
                 style={{
-                  background: 'linear-gradient(180deg, #ffda22 0%, #eab308 100%)',
-                  color: '#012217',
-                  boxShadow: '0 8px 30px rgba(250,204,21,0.35)'
+                  background:
+                    "linear-gradient(180deg, #ffda22 0%, #eab308 100%)",
+                  color: "#012217",
+                  boxShadow: "0 8px 30px rgba(250,204,21,0.35)",
                 }}
               >
                 এখনই অ্যাকাউন্ট খুলুন
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                <ArrowRight
+                  size={18}
+                  className="group-hover:translate-x-1 transition-transform"
+                />
               </Link>
             </div>
 
             {/* ডানপাশের ইমেজ এরিয়া */}
             <div className="md:col-span-5 flex justify-center md:justify-end items-center order-1 md:order-2 w-full">
               <div className="relative w-full max-w-[260px] sm:max-w-[300px] md:max-w-full aspect-[4/4.2] rounded-[2.5rem] overflow-hidden dynamic-float-banner">
-                <Image 
+                <Image
                   src="/bg.png"
                   alt="সহজ ডিজিটাল সেবা ব্যানার"
                   fill
@@ -103,7 +168,6 @@ export default function HomePage() {
                 />
               </div>
             </div>
-
           </div>
 
           <style>{`
@@ -133,16 +197,22 @@ export default function HomePage() {
 
             /* Mobile: hero+stats = full screen */
             @media (max-width: 768px) {
-              .hero-fullscreen-wrapper {
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-              }
-              .hero-section-flex {
-                flex: 1;
-              }
-            }
+  .hero-fullscreen-wrapper {
+    min-height: calc(100dvh - 100px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .hero-section-flex {
+    flex: 1;
+    padding-top: 1.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+  .hero-section-flex .dynamic-float-banner {
+    max-height: 200px !important;
+    aspect-ratio: 4/3 !important;
+  }
+}
 
             /* Desktop: আগের মতোই */
             @media (min-width: 769px) {
@@ -161,10 +231,13 @@ export default function HomePage() {
         <section className="relative z-20 max-w-5xl w-full mx-auto px-4 -mt-8 pb-8">
           <div className="bg-white rounded-[2rem] p-5 sm:p-6 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5 brand-gradient-shadow">
             {stats.map(({ icon: Icon, value, label, color, bgColor }, i) => (
-              <div key={i} 
+              <div
+                key={i}
                 className="flex flex-col items-center text-center p-4 sm:p-5 bg-white rounded-2xl transition-all duration-300 ease-out hover:-translate-y-1 group cursor-pointer stat-card-clean"
               >
-                <div className={`w-12 h-12 rounded-2xl ${bgColor} flex items-center justify-center mx-auto mb-3 transition-transform duration-300 group-hover:scale-105 shadow-sm`}>
+                <div
+                  className={`w-12 h-12 rounded-2xl ${bgColor} flex items-center justify-center mx-auto mb-3 transition-transform duration-300 group-hover:scale-105 shadow-sm`}
+                >
                   <Icon size={22} style={{ color: color }} />
                 </div>
                 <div className="text-xl sm:text-2xl font-black text-slate-800 tracking-tight">
@@ -177,18 +250,19 @@ export default function HomePage() {
             ))}
           </div>
         </section>
-
       </div>
       {/* ══════════ END FULL SCREEN WRAPPER ══════════ */}
 
       {/* ════════════════════ ALL SERVICES / PREMIUM GRID ═════════════════ */}
       <section className="py-2 max-w-5xl w-full mx-auto px-4 flex-1 mt-8">
-        
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl sm:text-2xl font-black text-slate-800 flex items-center gap-2">
             জনপ্রিয় সেবাসমূহ
           </h2>
-          <Link href="#all-services" className="text-emerald-600 font-extrabold text-xs sm:text-sm flex items-center gap-1 hover:text-emerald-800 transition-colors">
+          <Link
+            href="#all-services"
+            className="text-emerald-600 font-extrabold text-xs sm:text-sm flex items-center gap-1 hover:text-emerald-800 transition-colors"
+          >
             সব দেখুন <ArrowRight size={14} />
           </Link>
         </div>
@@ -196,32 +270,38 @@ export default function HomePage() {
         {/* ক্যাটাগরি ফিল্টার পিলস */}
         <div className="mb-6 flex flex-wrap gap-2">
           {!hasAllCategory && (
-            <button 
-              onClick={() => setActiveCategory('all')}
+            <button
+              onClick={() => setActiveCategory("all")}
               className="transition-all duration-200 active:scale-95 px-5 py-2.5 rounded-full text-xs sm:text-sm font-black shadow-sm"
               style={{
-                cursor: 'pointer',
-                ...(activeCategory === 'all' 
-                  ? { background: '#012217', color: '#fff' } 
-                  : { background: '#fff', color: '#64748b', boxShadow: '0 4px 12px rgba(1,34,23,0.02)' }
-                )
+                cursor: "pointer",
+                ...(activeCategory === "all"
+                  ? { background: "#012217", color: "#fff" }
+                  : {
+                      background: "#fff",
+                      color: "#64748b",
+                      boxShadow: "0 4px 12px rgba(1,34,23,0.02)",
+                    }),
               }}
             >
               ⚡ সকল সেবা
             </button>
           )}
-          
-          {categories.map(cat => (
+
+          {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
               className="transition-all duration-200 active:scale-95 px-5 py-2.5 rounded-full text-xs sm:text-sm font-black shadow-sm"
               style={{
-                cursor: 'pointer',
+                cursor: "pointer",
                 ...(activeCategory === cat.id
-                  ? { background: '#012217', color: '#fff' }
-                  : { background: '#fff', color: '#64748b', boxShadow: '0 4px 12px rgba(1,34,23,0.02)' }
-                )
+                  ? { background: "#012217", color: "#fff" }
+                  : {
+                      background: "#fff",
+                      color: "#64748b",
+                      boxShadow: "0 4px 12px rgba(1,34,23,0.02)",
+                    }),
               }}
             >
               <span className="mr-1">{cat.icon}</span> {cat.label}
@@ -231,26 +311,32 @@ export default function HomePage() {
 
         {/* সার্চ বার */}
         <div className="mb-8 relative w-full max-w-md shadow-sm rounded-2xl">
-          <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
-          <input 
-            type="text" 
-            value={searchQuery} 
-            onChange={e => setSearchQuery(e.target.value)} 
-            placeholder="সার্ভিস বা মডিউল সার্চ করুন..." 
+          <Search
+            size={18}
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+          />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="সার্ভিস বা মডিউল সার্চ করুন..."
             className="w-full pl-11 pr-4 py-3 rounded-2xl bg-white text-sm outline-none focus:ring-4 focus:ring-emerald-100/40 transition-all shadow-sm focus:shadow-md"
           />
         </div>
 
         {/* সার্ভিস গ্রিড লেআউট */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-5" id="all-services">
-          {filteredServices.map(s => (
-            <Link 
-              key={s.id} 
+        <div
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-5"
+          id="all-services"
+        >
+          {filteredServices.map((s) => (
+            <Link
+              key={s.id}
               href="/dashboard"
               className="group bg-white rounded-2xl p-5 flex flex-col items-center text-center transition-all duration-300 ease-out hover:-translate-y-1 service-box-clean"
             >
               <div className="w-14 h-14 rounded-full text-emerald-700 bg-[#f4f8f6] flex items-center justify-center text-2xl mb-4 transition-all duration-300 group-hover:scale-105 group-hover:bg-[#e6f0ec] group-hover:text-[#012217] shadow-inner">
-                {s.icon || '📄'}
+                {s.icon || "📄"}
               </div>
               <p className="text-xs sm:text-sm font-black text-slate-700 line-clamp-2 h-10 mb-4 flex items-center justify-center leading-snug transition-colors duration-300 group-hover:text-black">
                 {s.title}
@@ -265,19 +351,32 @@ export default function HomePage() {
 
       {/* ════════════════════ রেফারেল ব্যানার ═══════════════════ */}
       <section className="my-12 max-w-5xl w-full mx-auto px-4">
-        <div className="rounded-[2rem] p-6 sm:p-8 text-white flex flex-col sm:flex-row items-center justify-between gap-6 relative overflow-hidden shadow-xl"
-          style={{ background: 'linear-gradient(135deg, #012217 0%, #024b30 100%)' }}>
+        <div
+          className="rounded-[2rem] p-6 sm:p-8 text-white flex flex-col sm:flex-row items-center justify-between gap-6 relative overflow-hidden shadow-xl"
+          style={{
+            background: "linear-gradient(135deg, #012217 0%, #024b30 100%)",
+          }}
+        >
           <div className="absolute right-0 top-0 bottom-0 w-40 opacity-10 bg-[radial-gradient(circle,_#facc15_0%,_transparent_75%)] pointer-events-none" />
-          
+
           <div className="flex items-center gap-4 text-center sm:text-left flex-col sm:flex-row relative z-10">
             <span className="text-4xl">🎁</span>
             <div>
-              <span className="text-[10px] font-black text-amber-300 bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-800/40 uppercase tracking-wider">নতুন অফার</span>
-              <h3 className="text-xl font-black mt-2">রেফার করে আনলিমিটেড ইনকাম</h3>
-              <p className="text-xs text-emerald-200/90 mt-0.5">প্রতি সফল রেফারে আপনার ওয়ালেটে যোগ হবে আকর্ষণীয় বোনাস</p>
+              <span className="text-[10px] font-black text-amber-300 bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-800/40 uppercase tracking-wider">
+                নতুন অফার
+              </span>
+              <h3 className="text-xl font-black mt-2">
+                রেফার করে আনলিমিটেড ইনকাম
+              </h3>
+              <p className="text-xs text-emerald-200/90 mt-0.5">
+                প্রতি সফল রেফারে আপনার ওয়ালেটে যোগ হবে আকর্ষণীয় বোনাস
+              </p>
             </div>
           </div>
-          <Link href="/dashboard" className="px-6 py-3 bg-amber-400 text-slate-950 text-xs sm:text-sm font-black rounded-xl hover:bg-amber-300 transition-all active:scale-95 shrink-0 shadow-lg relative z-10">
+          <Link
+            href="/dashboard"
+            className="px-6 py-3 bg-amber-400 text-slate-950 text-xs sm:text-sm font-black rounded-xl hover:bg-amber-300 transition-all active:scale-95 shrink-0 shadow-lg relative z-10"
+          >
             বিস্তারিত জানুন →
           </Link>
         </div>
@@ -291,8 +390,13 @@ export default function HomePage() {
               🛡️
             </div>
             <div>
-              <h4 className="text-sm sm:text-base font-black text-slate-800">নিরাপদ লেনদেন ও ১০০% নিশ্চিত সেবা</h4>
-              <p className="text-xs text-slate-400 mt-0.5">আপনার ব্যক্তিগত সকল তথ্য এবং পেমেন্ট ট্রানজেকশন সম্পূর্ণ সুরক্ষিত ও এন্ড-টু-এন্ড এনক্রিপ্টেড</p>
+              <h4 className="text-sm sm:text-base font-black text-slate-800">
+                নিরাপদ লেনদেন ও ১০০% নিশ্চিত সেবা
+              </h4>
+              <p className="text-xs text-slate-400 mt-0.5">
+                আপনার ব্যক্তিগত সকল তথ্য এবং পেমেন্ট ট্রানজেকশন সম্পূর্ণ
+                সুরক্ষিত ও এন্ড-টু-এন্ড এনক্রিপ্টেড
+              </p>
             </div>
           </div>
           <div className="px-4 py-1.5 bg-emerald-50 text-emerald-700 font-black text-xs rounded-full flex items-center gap-1 border border-emerald-100 shrink-0">
@@ -303,5 +407,5 @@ export default function HomePage() {
 
       <Footer />
     </div>
-  )
+  );
 }
