@@ -34,7 +34,8 @@ export default function HomePage() {
       <Navbar />
 
       {/* ══════════════════════ HERO SECTION ═══════════════════════ */}
-      <section className="relative w-full bg-[#012217] overflow-hidden pt-12 pb-28 md:py-24 flex items-center justify-center px-4 sm:px-6 lg:px-8">
+      {/*<section className="relative w-full bg-[#012217] overflow-hidden pt-12 pb-28 md:py-24 flex items-center justify-center px-4 sm:px-6 lg:px-8">*/}
+        <section className="relative w-full bg-[#012217] overflow-hidden flex items-center justify-center px-4 sm:px-6 lg:px-8" style={{ minHeight: 'calc(100vh - 120px)', paddingTop: '3rem', paddingBottom: '7rem' }}>
         <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-emerald-500/10 rounded-full blur-[150px] pointer-events-none" />
         <div className="absolute bottom-0 left-1/4 w-[350px] h-[350px] bg-emerald-400/5 rounded-full blur-[130px] pointer-events-none" />
 
@@ -141,7 +142,8 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════════ DYNAMIC STATS CARDS ═══════════════════════ */}
-      <section className="relative z-20 max-w-5xl w-full mx-auto px-4 -mt-8 mb-20" style={{ top: '20px' }}>
+      {/*<section className="relative z-20 max-w-5xl w-full mx-auto px-4 -mt-8 mb-20" style={{ top: '20px' }}>*/}
+        <section className="relative z-20 max-w-5xl w-full mx-auto px-4 -mt-8" style={{ marginBottom: '0' }}>
         <div className="bg-white rounded-[2rem] p-5 sm:p-6 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5 brand-gradient-shadow">
           {stats.map(({ icon: Icon, value, label, color, bgColor }, i) => (
             <div key={i} 
