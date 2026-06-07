@@ -205,12 +205,19 @@ export default function HomePage() {
   }
   .hero-section-flex {
     flex: 1;
-    padding-top: 1.5rem !important;
-    padding-bottom: 2.5rem !important;
+    padding-top: 1rem !important;
+    padding-bottom: 2rem !important;
   }
   .hero-section-flex .dynamic-float-banner {
-    max-height: 200px !important;
-    aspect-ratio: 4/3 !important;
+    max-height: 160px !important;
+    max-width: 160px !important;
+    aspect-ratio: 1/1 !important;
+  }
+  .hero-section-flex h1 {
+    font-size: 2rem !important;
+  }
+  .hero-section-flex .space-y-3 {
+    display: none !important;
   }
 }
 
