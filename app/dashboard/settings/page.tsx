@@ -13,8 +13,8 @@ export default function SettingsPage() {
   const [saved, setSaved] = useState(false)
 
   const [profileForm, setProfileForm] = useState({
-    fullName: 'Asiful Islam',
-    phone: '01744182465',
+    fullName: '',
+    phone: '',
     email: ''
   })
 
@@ -195,8 +195,8 @@ export default function SettingsPage() {
               <>
                 <p className="section-title">🛡️ নিরাপত্তা তথ্য</p>
                 {[
-                  { label: 'ইমেইল যাচাই', sub: 'asiful1@gmail.com', status: 'যাচাইকৃত', green: true },
-                  { label: 'মোবাইল যাচাই', sub: '01744182465', status: 'যাচাইকৃত', green: true },
+                  { label: 'ইমেইল যাচাই', sub: '', status: 'যাচাইকৃত', green: true },
+                  { label: 'মোবাইল যাচাই', sub: '', status: 'যাচাইকৃত', green: true },
                   { label: 'NID যাচাই', sub: 'জাতীয় পরিচয়পত্র', status: 'অযাচাইকৃত', green: false },
                   { label: 'দুই স্তর যাচাই (2FA)', sub: 'অতিরিক্ত নিরাপত্তা', status: 'নিষ্ক্রিয়', green: false },
                 ].map((item, i) => (

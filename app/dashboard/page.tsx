@@ -153,7 +153,7 @@ export default function DashboardPage() {
 
           <div className="nav-links">
             <Link href="/dashboard" className="nav-btn active"><Home size={14} /> কনসোল হোম</Link>
-            <Link href="/dashboard/profile" className="nav-btn"><User size={14} /> প্রোফাইল</Link>
+            {/*<Link href="/dashboard/profile" className="nav-btn"><User size={14} /> প্রোফাইল</Link>*/}
             <Link href="/dashboard/orders" className="nav-btn"><Clock size={14} /> অর্ডার ট্র্যাকিং</Link>
             <Link href="/dashboard/settings" className="nav-btn"><Settings size={14} /> সেটিংস</Link>
             

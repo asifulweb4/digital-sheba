@@ -65,10 +65,7 @@ export default function ContactPage() {
                   <div className="w-12 h-12 bg-[#f0fdf4] rounded-2xl flex items-center justify-center flex-shrink-0">
                     <Clock className="text-[#10b981]" size={20} />
                   </div>
-                  <div>
-                    <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">অফিস সময়</p>
-                    <p className="text-[#022c22] font-black">শনিবার - বৃহস্পতিবার (১০ AM - ৮ PM)</p>
-                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -79,7 +76,7 @@ export default function ContactPage() {
               <MessageSquare className="mb-4 text-emerald-400" size={32} />
               <h3 className="text-xl font-bold mb-2">লাইভ সাপোর্ট</h3>
               <p className="text-emerald-100/70 text-sm mb-6">আমাদের সাপোর্ট টিমের সাথে সরাসরি কথা বলতে হোয়াটসঅ্যাপ ব্যবহার করুন।</p>
-              <a href="https://wa.me/message/JJZIWPGL7JTXB1" target="_blank" rel="noopener noreferrer" className="btn-gold px-6 py-3 text-sm inline-block w-full text-center">হোয়াটসঅ্যাপ মেসেজ</a>
+              <a href="https://wa.me/8801889079173" target="_blank" rel="noopener noreferrer" className="btn-gold px-6 py-3 text-sm inline-block w-full text-center">হোয়াটসঅ্যাপ মেসেজ</a>
             </div>
           </div>
 
@@ -94,7 +91,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-2">ফোন নম্বর</label>
-                  <input type="tel" placeholder="০১৭XXXXXXXX" required className="w-full px-5 py-4 rounded-2xl border border-gray-100 bg-gray-50 focus:bg-white transition-all outline-none text-sm" />
+                  <input type="tel" placeholder="" required className="w-full px-5 py-4 rounded-2xl border border-gray-100 bg-gray-50 focus:bg-white transition-all outline-none text-sm" />
                 </div>
                 <div className="md:col-span-2">
                   <label className="block text-sm font-bold text-gray-700 mb-2">বিষয়</label>

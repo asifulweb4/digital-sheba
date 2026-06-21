@@ -75,9 +75,8 @@ export default function Footer() {
             {/* Socials */}
             <div style={{ display: 'flex', gap: '12px' }}>
               {[
-                { href: 'https://facebook.com', hoverBg: '#2563eb', Icon: MessageSquare },
                 { href: 'https://youtube.com', hoverBg: '#dc2626', Icon: Video },
-                { href: 'https://wa.me/message/JJZIWPGL7JTXB1', hoverBg: '#16a34a', Icon: MessageCircle },
+                { href: 'https://wa.me/8801889079173', hoverBg: '#16a34a', Icon: MessageCircle },
               ].map(({ href, hoverBg, Icon }) => (
                 <a
                   key={href} href={href} target="_blank" rel="noopener noreferrer"
