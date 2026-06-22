@@ -2,7 +2,10 @@ import { SignJWT, jwtVerify } from 'jose'
 import { cookies } from 'next/headers'
 import bcrypt from 'bcryptjs'
 
-const SECRET = new TextEncoder().encode(process.env.JWT_SECRET || 'shohoj-digital-seba-secret-key-2024')
+if (!process.env.JWT_SECRET) {
+    throw new Error('FATAL: JWT_SECRET environment variable is missing!')
+}
+const SECRET = new TextEncoder().encode(process.env.JWT_SECRET)
 
 export async function hashPassword(password: string) {
     return await bcrypt.hash(password, 10)

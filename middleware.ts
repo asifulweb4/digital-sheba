@@ -1,7 +1,10 @@
 import { NextResponse, NextRequest } from 'next/server'
 import { jwtVerify } from 'jose'
 
-const SECRET = new TextEncoder().encode(process.env.JWT_SECRET || 'shohoj-digital-seba-secret-key-2024')
+if (!process.env.JWT_SECRET) {
+    throw new Error('FATAL: JWT_SECRET environment variable is missing!')
+}
+const SECRET = new TextEncoder().encode(process.env.JWT_SECRET)
 
 export async function middleware(request: NextRequest) {
     const session = request.cookies.get('session')?.value
@@ -10,21 +13,36 @@ export async function middleware(request: NextRequest) {
     const isAdmin = request.nextUrl.pathname.startsWith('/admin')
     const isAuth = request.nextUrl.pathname.startsWith('/auth')
 
-    if (isDashboard || isAdmin) {
-        if (!session) return NextResponse.redirect(new URL('/auth/login', request.url))
-        
+    let payload = null;
+    if (session) {
         try {
-            const { payload } = await jwtVerify(session, SECRET)
-            if (isAdmin && (payload as any).role !== 'admin') {
-                return NextResponse.redirect(new URL('/dashboard', request.url))
-            }
+            const verified = await jwtVerify(session, SECRET)
+            payload = verified.payload
         } catch (err) {
-            return NextResponse.redirect(new URL('/auth/login', request.url))
+            // Invalid token (e.g. secret changed or expired)
         }
     }
 
-    if (isAuth && session) {
+    if (isDashboard || isAdmin) {
+        if (!payload) {
+            const res = NextResponse.redirect(new URL('/auth/login', request.url))
+            res.cookies.delete('session')
+            return res
+        }
+        
+        if (isAdmin && (payload as any).role !== 'admin') {
+            return NextResponse.redirect(new URL('/dashboard', request.url))
+        }
+    }
+
+    if (isAuth && payload) {
         return NextResponse.redirect(new URL('/dashboard', request.url))
+    }
+
+    if (isAuth && session && !payload) {
+        const res = NextResponse.next()
+        res.cookies.delete('session')
+        return res
     }
 
     return NextResponse.next()

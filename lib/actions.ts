@@ -10,6 +10,11 @@ import { hashPassword, comparePassword, createToken, getSession } from './auth'
 
 export async function registerAction(formData: any) {
     const { name, phone, password } = formData
+    
+    // Security: Input length limits to prevent DoS
+    if (typeof password !== 'string' || password.length > 72) return { success: false, message: 'পাসওয়ার্ডটি ৭২ ক্যারেক্টারের নিচে হতে হবে' }
+    if (typeof name !== 'string' || name.length > 100) return { success: false, message: 'নামটি ১০০ ক্যারেক্টারের নিচে হতে হবে' }
+    
     let formattedPhone = phone.trim().replace(/\s/g, '')
     if (formattedPhone.startsWith('+88')) formattedPhone = formattedPhone.replace('+88', '')
 
@@ -34,6 +39,10 @@ export async function registerAction(formData: any) {
 
 export async function loginAction(formData: any) {
     const { phone, password } = formData
+    
+    // Security: Input length limit
+    if (typeof password !== 'string' || password.length > 72) return { success: false, message: 'পাসওয়ার্ড খুব বড়' }
+
     let formattedPhone = phone.trim().replace(/\s/g, '')
     if (formattedPhone.startsWith('+88')) formattedPhone = formattedPhone.replace('+88', '')
 
@@ -45,7 +54,7 @@ export async function loginAction(formData: any) {
 
     const token = await createToken({ id: user[0].id, phone: user[0].phone, role: user[0].role })
     const cookieStore = await cookies()
-    cookieStore.set('session', token, { httpOnly: true, secure: true, maxAge: 60 * 60 * 24 * 7 })
+    cookieStore.set('session', token, { httpOnly: true, secure: true, sameSite: 'strict', maxAge: 60 * 60 * 24 * 7 })
     return { success: true }
 }
 
@@ -59,7 +68,11 @@ export async function getProfile() {
     const session = await getSession()
     if (!session) return null
     const user = await db.select().from(profiles).where(eq(profiles.id, (session as any).id)).limit(1)
-    return user[0] || null
+    
+    if (user.length === 0) return null
+    // Security: Exclude hashed password from the response
+    const { password, ...safeUser } = user[0]
+    return safeUser
 }
 
 // --- Orders ---

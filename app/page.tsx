@@ -34,7 +34,7 @@ export default function HomePage() {
       <Navbar />
 
       {/* ══════════════════════ HERO SECTION ═══════════════════════ */}
-      <section className="relative w-full bg-[#012217] overflow-hidden pt-12 pb-28 md:py-24 flex items-center justify-center px-4 sm:px-6 lg:px-8">
+      <section className="relative w-full bg-[#012217] overflow-hidden pt-6 pb-28 md:pt-12 md:pb-24 flex items-center justify-center px-4 sm:px-6 lg:px-8">
         <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-emerald-500/10 rounded-full blur-[150px] pointer-events-none" />
         <div className="absolute bottom-0 left-1/4 w-[350px] h-[350px] bg-emerald-400/5 rounded-full blur-[130px] pointer-events-none" />
 

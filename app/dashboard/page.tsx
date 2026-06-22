@@ -274,7 +274,7 @@ export default function DashboardPage() {
         {/* সার্ভিস গ্রিড */}
         <section className="service-grid">
           {filteredServices.map((service: any) => (
-            <button key={service.id} onClick={() => setActiveService(service.id)} className="service-card-db">
+            <Link href={`/dashboard/services/${service.id}`} key={service.id} className="service-card-db" style={{ textDecoration: 'none' }}>
               <div className="card-icon-holder" style={{ width: 44, height: 44, borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, marginBottom: 12 }}>
                 {service.icon || '📄'}
               </div>
@@ -284,50 +284,12 @@ export default function DashboardPage() {
               <div className="price-tag">
                 ৳ {service.price}
               </div>
-            </button>
+            </Link>
           ))}
         </section>
       </div>
 
-      {/* মোডাল উইন্ডো */}
-      {activeService && (
-        <div className="modal-overlay" onClick={() => setActiveService(null)}>
-          <div className="modal-box" onClick={e => e.stopPropagation()}>
-            {(() => {
-              const s = services.find((sv: any) => sv.id === activeService)
-              if (!s) return null
-              return (
-                <>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                      <div style={{ background: '#e6f7f0', width: 48, height: 48, borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22 }}>
-                        {s.icon || '📄'}
-                      </div>
-                      <div style={{ textAlign: 'left' }}>
-                        <h3 style={{ fontSize: 15, fontWeight: 800, color: '#1f2937', margin: 0 }}>{s.title}</h3>
-                        <p style={{ fontSize: 12, fontWeight: 700, color: '#006a4e', margin: '2px 0 0 0' }}>চার্জ: {s.price} ৳</p>
-                      </div>
-                    </div>
-                  </div>
-                  <input 
-                    type="text" 
-                    value={orderInput} 
-                    onChange={e => setOrderInput(e.target.value)} 
-                    placeholder={s.inputPlaceholder || 'এখানে প্রয়োজনীয় তথ্য দিন...'} 
-                    style={{ width: '100%', padding: '12px 14px', borderRadius: 12, border: '1.5px solid #cce3d3', marginBottom: 20, fontSize: 13, outline: 'none' }} 
-                  />
-                  <div style={{ display: 'flex', gap: 10 }}>
-                    <button onClick={() => setActiveService(null)} style={{ flex: 1, padding: '12px', borderRadius: 12, background: '#f3f4f6', border: 'none', color: '#4b5563', fontWeight: 700, cursor: 'pointer' }}>বাতিল</button>
-                    <button onClick={() => handlePlaceOrder(s)} disabled={submitting} style={{ flex: 1, padding: '12px', borderRadius: 12, background: '#006a4e', color: '#fff', border: 'none', fontWeight: 700, cursor: 'pointer' }}>
-                      {submitting ? 'লোড হচ্ছে...' : 'অর্ডার করুন'}
-                    </button>
-                  </div>
-                </>
-              )
-            })()}
-          </div>
-        </div>
-      )}
+
     </>
   )
 }
