@@ -26,6 +26,8 @@ export const services: Service[] = [
   { id: 'nid-by-name-address', title: 'নাম ঠিকানা দিয়ে এনআইডি', titleEn: 'NID by Name Address', description: 'নাম ও ঠিকানা দিয়ে NID সংগ্রহ', icon: '🪪', color: 'bg-blue-600', category: 'nid', price: 130, inputLabel: 'নাম ও ঠিকানা', inputPlaceholder: 'পূর্ণ নাম / বিস্তারিত ঠিকানা দিন' },
   { id: 'nid-by-name-address-pdf', title: 'নাম ঠিকানা দিয়ে এনআইডি (PDF)', titleEn: 'NID by Name Address PDF', description: 'নাম ও ঠিকানা দিয়ে NID এর PDF কপি', icon: '📄', color: 'bg-indigo-600', category: 'nid', price: 130, inputLabel: 'নাম ও ঠিকানা', inputPlaceholder: 'পূর্ণ নাম / বিস্তারিত ঠিকানা দিন' },
   { id: 'nid-user-password-set', title: 'NID User & Password সেট', titleEn: 'NID User & Password Set', description: 'NID একাউন্টের ইউজার ও পাসওয়ার্ড সেট', icon: '🔐', color: 'bg-teal-600', category: 'nid', price: 120, inputLabel: 'আইডি নাম্বার ও জন্ম তারিখ', inputPlaceholder: 'আইডি নাম্বার / জন্ম তারিখ (DD/MM/YYYY)' },
+  { id: 'mobile-to-nid', title: 'মোবাইল দিয়ে NID উত্তোলন', titleEn: 'Mobile to NID Card', description: 'মোবাইল নাম্বার দিয়ে NID কার্ডের তথ্য উত্তোলন', icon: '🔍', color: 'bg-violet-600', category: 'nid', price: 99, popular: true, inputLabel: 'মোবাইল নাম্বার', inputPlaceholder: '01XXXXXXXXX নাম্বার দিন' },
+  { id: 'nid-to-all-sim-info', title: 'NID দিয়ে অল সিম ইনফো', titleEn: 'NID to All SIM Info', description: 'NID কার্ড নাম্বার দিয়ে সকল সিমের বিস্তারিত তথ্য', icon: '📶', color: 'bg-indigo-600', category: 'nid', price: 99, popular: true, inputLabel: 'আইডি নাম্বার', inputPlaceholder: 'জাতীয় পরিচয়পত্র নাম্বার দিন' },
 
   // জন্ম নিবন্ধন
   { id: 'new-birth-reg', title: 'নতুন জন্মনিবন্ধন', titleEn: 'New Birth Registration', description: 'সম্পূর্ণ নতুন জন্মনিবন্ধন আবেদন', icon: '👶', color: 'bg-green-700', category: 'birth', price: 510, inputLabel: 'নাম ও জন্ম তারিখ', inputPlaceholder: 'শিশুর নাম / জন্ম তারিখ / পিতামাতার নাম' },
@@ -48,8 +50,7 @@ export const services: Service[] = [
   { id: 'rocket-info', title: 'রকেট তথ্য', titleEn: 'Rocket Info', description: 'ডাচ বাংলা রকেট তথ্য অনুসন্ধান', icon: '🚀', color: 'bg-purple-500', category: 'mobile', price: 399, inputLabel: 'রকেট নাম্বার', inputPlaceholder: 'রকেট নাম্বার দিন (01XXXXXXXXX)' },
   { id: 'cdr', title: 'সিডিআর', titleEn: 'CDR', description: 'কল ডিটেইল রেকর্ড (CDR)', icon: '📞', color: 'bg-cyan-600', category: 'mobile', price: 250, inputLabel: 'মোবাইল নাম্বার', inputPlaceholder: '01XXXXXXXXX নাম্বার দিন' },
   { id: 'nid-to-all-number', title: 'NID টু অল নাম্বার', titleEn: 'NID to All Number', description: 'NID দিয়ে রেজিস্ট্রেশন করা সকল নাম্বার বের করুন', icon: '📱', color: 'bg-teal-500', category: 'mobile', price: 150, inputLabel: 'আইডি নাম্বার', inputPlaceholder: 'জাতীয় পরিচয়পত্র নাম্বার দিন' },
-  { id: 'mobile-to-nid', title: 'মোবাইল দিয়ে NID উত্তোলন', titleEn: 'Mobile to NID Card', description: 'মোবাইল নাম্বার দিয়ে NID কার্ডের তথ্য উত্তোলন', icon: '🔍', color: 'bg-violet-600', category: 'mobile', price: 99, popular: true, inputLabel: 'মোবাইল নাম্বার', inputPlaceholder: '01XXXXXXXXX নাম্বার দিন' },
-  { id: 'nid-to-all-sim-info', title: 'NID দিয়ে অল সিম ইনফো', titleEn: 'NID to All SIM Info', description: 'NID কার্ড নাম্বার দিয়ে সকল সিমের বিস্তারিত তথ্য', icon: '📶', color: 'bg-indigo-600', category: 'mobile', price: 99, popular: true, inputLabel: 'আইডি নাম্বার', inputPlaceholder: 'জাতীয় পরিচয়পত্র নাম্বার দিন' },
+  
 
   // লোকেশন ট্র্যাকিং
   { id: 'number-location', title: 'নম্বর টু লোকেশন', titleEn: 'Number to Location', description: 'মোবাইল নম্বর দিয়ে লোকেশন ট্র্যাকিং', icon: '📍', color: 'bg-red-500', category: 'location', price: 170, popular: true, inputLabel: 'মোবাইল নাম্বার', inputPlaceholder: '01XXXXXXXXX নাম্বার দিন' },
