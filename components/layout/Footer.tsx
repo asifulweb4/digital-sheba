@@ -76,7 +76,7 @@ export default function Footer() {
             <div style={{ display: 'flex', gap: '12px' }}>
               {[
                 { href: 'https://youtube.com', hoverBg: '#dc2626', Icon: Video },
-                { href: 'https://wa.me/8801889079173', hoverBg: '#16a34a', Icon: MessageCircle },
+                { href: 'https://wa.me/8801625400511', hoverBg: '#16a34a', Icon: MessageCircle },
               ].map(({ href, hoverBg, Icon }) => (
                 <a
                   key={href} href={href} target="_blank" rel="noopener noreferrer"
@@ -182,7 +182,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="https://wa.me/8801889079173"
+                  href="https://wa.me/8801625400511"
                   target="_blank" rel="noopener noreferrer"
                   style={{
                     display: 'flex', alignItems: 'center', gap: '10px',
@@ -205,12 +205,12 @@ export default function Footer() {
                   <Mail size={14} style={{ color: '#34d399' }} />
                 </div>
                 <a
-                  href="mailto:support@digitalshebabd.com"
+                  href="mailto:"
                   style={{ fontSize: '14px', fontWeight: '600', color: '#d1d5db', textDecoration: 'none', wordBreak: 'break-all' }}
                   onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#34d399'}
                   onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#d1d5db'}
                 >
-                  support@digitalshebabd.com
+                  
                 </a>
               </li>
             </ul>
