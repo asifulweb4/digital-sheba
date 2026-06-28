@@ -47,7 +47,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">ইমেইল</p>
-                    <p className="text-[#022c22] font-black">support@digitalshebabd.com</p>
+                    <p className="text-[#022c22] font-black"></p>
                   </div>
                 </div>
 
@@ -57,7 +57,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">ঠিকানা</p>
-                    <p className="text-[#022c22] font-black">মিরপুর, ঢাকা, বাংলাদেশ</p>
+                    <p className="text-[#022c22] font-black">ঢাকা, বাংলাদেশ</p>
                   </div>
                 </div>
 
@@ -76,7 +76,7 @@ export default function ContactPage() {
               <MessageSquare className="mb-4 text-emerald-400" size={32} />
               <h3 className="text-xl font-bold mb-2">লাইভ সাপোর্ট</h3>
               <p className="text-emerald-100/70 text-sm mb-6">আমাদের সাপোর্ট টিমের সাথে সরাসরি কথা বলতে হোয়াটসঅ্যাপ ব্যবহার করুন।</p>
-              <a href="https://wa.me/8801889079173" target="_blank" rel="noopener noreferrer" className="btn-gold px-6 py-3 text-sm inline-block w-full text-center">হোয়াটসঅ্যাপ মেসেজ</a>
+              <a href="https://wa.me/8801625400511" target="_blank" rel="noopener noreferrer" className="btn-gold px-6 py-3 text-sm inline-block w-full text-center">হোয়াটসঅ্যাপ মেসেজ</a>
             </div>
           </div>
 

@@ -53,8 +53,8 @@ export default function Navbar() {
           </span>
           <div className="flex items-center gap-2 ml-auto">
             <Phone size={11} style={{ color: '#fbbf24' }} />
-            <a href="tel:01889079173" className="font-bold tracking-wider transition-colors" style={{ color: '#fcd34d' }}>
-              01889079173
+            <a href="tel:01625400511" className="font-bold tracking-wider transition-colors" style={{ color: '#fcd34d' }}>
+              01625400511
             </a>
           </div>
         </div>
