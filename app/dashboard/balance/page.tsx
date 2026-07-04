@@ -34,8 +34,8 @@ export default function RechargePage() {
     const maxWithdraw = 10000;
 
     const paymentNumbers = {
-        bKash: "01625400511",
-        Nagad: "01625400511"
+        bKash: "01625400505",
+        Nagad: "01625400505"
     };
 
     const handleCopy = (num: string, type: string) => {
